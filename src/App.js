@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import rvuLogo from './rvu-logo.png';  // Import the logo from src folder
 
 // Replace with your OAuth Client ID
 const clientId = '413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com';
@@ -30,8 +31,9 @@ function App() {
     <GoogleOAuthProvider clientId={clientId}>
       <div style={styles.container}>
         <div style={styles.header}>
+          {/* Use the logo from the src folder */}
           <img 
-            src="https://rvu.edu.in/wp-content/uploads/2020/12/RV-University-Logo.svg" 
+            src={rvuLogo} 
             alt="RV University Logo" 
             style={styles.logo} 
             onClick={() => window.location.href = "https://rvu.edu.in/"}
@@ -47,6 +49,7 @@ function App() {
               onError={handleFailure} 
               theme="filled_blue" 
               size="large"
+              style={styles.googleButton}
             />
           </div>
         ) : (
@@ -70,27 +73,37 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100vh',
-    background: 'linear-gradient(135deg, #d4af37, #5d4037)',  // Gold and Brown gradient
+    background: 'linear-gradient(135deg, #D4AF37, #003366)',  // Gold and Dark Blue gradient
     color: '#fff',
     textAlign: 'center',
     fontFamily: 'Arial, sans-serif',
+    animation: 'fadeIn 1.5s ease-out',
   },
   logo: {
     cursor: 'pointer',
-    width: '200px',
+    width: '180px',
     marginBottom: '20px',
+    transition: 'transform 0.3s',
+  },
+  logoHover: {
+    transform: 'scale(1.1)',
   },
   header: {
     marginBottom: '50px',
+    padding: '20px',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+    borderRadius: '10px',
   },
   title: {
     fontSize: '2.5rem',
     fontWeight: 'bold',
     margin: '0',
     letterSpacing: '2px',
+    textTransform: 'uppercase',
   },
   loginContainer: {
     marginTop: '20px',
+    animation: 'slideIn 1s ease-out',
   },
   error: {
     color: '#f44336',
@@ -103,10 +116,24 @@ const styles = {
   welcomeText: {
     fontSize: '2rem',
     marginBottom: '20px',
+    animation: 'bounceIn 1.5s ease-out',
   },
   email: {
     fontSize: '1.2rem',
     color: '#ddd',
+    marginBottom: '20px',
+  },
+  googleButton: {
+    backgroundColor: '#4285F4',
+    color: '#fff',
+    borderRadius: '5px',
+    padding: '12px 30px',
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    border: 'none',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+    transition: 'background-color 0.3s, transform 0.2s',
   },
   logoutButton: {
     marginTop: '20px',
