@@ -10,16 +10,9 @@ function App() {
 
   const handleSuccess = (response) => {
     const decodedToken = JSON.parse(atob(response.credential.split('.')[1]));
-    const email = decodedToken.email;
-    const domain = email.split('@')[1];
-
-    if (domain === 'rvu.edu.in') {
-      setUser(decodedToken); // Save user info
-      setIsLoggedIn(true); // Set login state
-      setError(null); // Clear any previous errors
-    } else {
-      setError('Access is restricted to users with the rvu.edu.in domain.');
-    }
+    setUser(decodedToken); // Save user info
+    setIsLoggedIn(true); // Set login state
+    setError(null); // Clear any previous errors
   };
 
   const handleFailure = () => {
@@ -40,7 +33,7 @@ function App() {
             <header style={styles.header}>
               <h1 style={styles.title}>Welcome to RV University</h1>
               <p style={styles.subtitle}>
-                Please log in with your RVU email to continue.
+                Please log in with your Google account to continue.
               </p>
             </header>
             {error && <p style={styles.error}>{error}</p>}
