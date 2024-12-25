@@ -66,3 +66,72 @@ function App() {
 }
 
 export default App;
+
+// Inline CSS Styles
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    background: 'linear-gradient(135deg, #1e3c72, #2a5298)',
+    color: '#fff',
+    textAlign: 'center',
+  },
+  logo: {
+    width: '200px',
+    marginBottom: '20px',
+    cursor: 'pointer',
+  },
+  loginBox: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: 'rgba(0, 0, 0, 0.7)',
+    padding: '30px',
+    borderRadius: '10px',
+    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+    margin: '20px 0',
+  },
+  header: {
+    marginBottom: '20px',
+  },
+  title: {
+    fontSize: '3rem',
+    fontWeight: 'bold',
+    margin: 0,
+  },
+  subtitle: {
+    fontSize: '1.5rem',
+    margin: '10px 0',
+    fontWeight: 'lighter',
+  },
+  error: {
+    color: '#ff6b6b',
+    fontSize: '1rem',
+    marginBottom: '20px',
+  },
+  userInfo: {
+    padding: '20px',
+    background: 'rgba(0, 0, 0, 0.7)',
+    borderRadius: '10px',
+    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+  },
+  logoutButton: {
+    marginTop: '20px',
+    padding: '10px 20px',
+    fontSize: '1rem',
+    color: '#fff',
+    backgroundColor: '#e74c3c',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.2)',
+    transition: 'background-color 0.3s, transform 0.2s',
+  },
+};
+
+// Apply the styles to the document
+Object.assign(document.body.style, styles.container);
