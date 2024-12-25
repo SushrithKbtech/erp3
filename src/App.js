@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
+// Main App Component
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
@@ -27,29 +28,34 @@ function App() {
 
   return (
     <GoogleOAuthProvider clientId={clientId}>
-      <div style={styles.container}>
+      <div className="container">
+        {/* Logo that redirects to the RV University website */}
+        <a href="https://rvu.edu.in/" target="_blank" rel="noopener noreferrer">
+          <img src="/logo.png" alt="RV University Logo" className="logo" />
+        </a>
+
         {!isLoggedIn ? (
-          <div>
-            <header style={styles.header}>
-              <h1 style={styles.title}>Welcome to RV University</h1>
-              <p style={styles.subtitle}>
-                Please log in with your Google account to continue.
-              </p>
+          <div className="login-box">
+            <header className="header">
+              <h1 className="title">Welcome to RV University</h1>
+              <p className="subtitle">Please log in with your Google account</p>
             </header>
-            {error && <p style={styles.error}>{error}</p>}
+            {error && <p className="error">{error}</p>}
             <GoogleLogin
               onSuccess={handleSuccess}
               onError={handleFailure}
+              useOneTap
+              theme="outline" // Style the button as outlined
             />
           </div>
         ) : (
-          <div>
-            <header style={styles.header}>
-              <h1 style={styles.title}>Welcome to RV University</h1>
-              <p style={styles.subtitle}>Hello, {user.name}!</p>
-              <p style={styles.email}>{user.email}</p>
+          <div className="user-info">
+            <header className="header">
+              <h1 className="title">Welcome to RV University</h1>
+              <p className="subtitle">Hello, {user.name}!</p>
+              <p className="email">{user.email}</p>
             </header>
-            <button style={styles.logoutButton} onClick={handleLogout}>
+            <button className="logout-button" onClick={handleLogout}>
               Logout
             </button>
           </div>
@@ -59,7 +65,9 @@ function App() {
   );
 }
 
-// Inline styles for the app
+export default App;
+
+// Inline CSS styling for the app
 const styles = {
   container: {
     display: 'flex',
@@ -67,9 +75,14 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',
-    background: 'linear-gradient(135deg, #1e3c72, #2a5298)',
+    background: 'linear-gradient(135deg, #4b6cb7, #182848)', // RV University-like color gradient
     color: '#fff',
     textAlign: 'center',
+  },
+  logo: {
+    width: '150px',
+    marginBottom: '40px',
+    cursor: 'pointer',
   },
   header: {
     marginBottom: '20px',
@@ -77,21 +90,47 @@ const styles = {
   title: {
     fontSize: '3rem',
     fontWeight: 'bold',
-    margin: 0,
+    color: '#ffcc00', // RV University yellow
   },
   subtitle: {
     fontSize: '1.5rem',
-    margin: '10px 0',
+    color: '#f4f4f4',
     fontWeight: 'lighter',
-  },
-  email: {
-    fontSize: '1rem',
-    color: '#ddd',
   },
   error: {
     color: '#ff6b6b',
     fontSize: '1rem',
     marginBottom: '20px',
+  },
+  loginBox: {
+    padding: '40px',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    borderRadius: '15px',
+    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
+  },
+  googleLogin: {
+    background: '#ffcc00',
+    color: '#fff',
+    borderRadius: '5px',
+    border: 'none',
+    fontSize: '1.1rem',
+    padding: '15px 40px',
+    cursor: 'pointer',
+    transition: 'transform 0.3s ease, background-color 0.3s ease',
+  },
+  googleLoginHover: {
+    backgroundColor: '#f39c12',
+    transform: 'scale(1.05)',
+  },
+  userInfo: {
+    padding: '40px',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    borderRadius: '15px',
+    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
+  },
+  email: {
+    color: '#ddd',
+    fontSize: '1.1rem',
   },
   logoutButton: {
     marginTop: '20px',
@@ -102,9 +141,10 @@ const styles = {
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.2)',
     transition: 'background-color 0.3s, transform 0.2s',
   },
+  logoutButtonHover: {
+    backgroundColor: '#c0392b',
+    transform: 'scale(1.05)',
+  },
 };
-
-export default App;
