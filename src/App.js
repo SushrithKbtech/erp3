@@ -28,6 +28,7 @@ function App() {
   return (
     <GoogleOAuthProvider clientId={clientId}>
       <div style={styles.container}>
+        {/* Left Side */}
         <div style={styles.leftSide}>
           {/* RV University Logo */}
           <img 
@@ -53,8 +54,10 @@ function App() {
             </div>
           )}
         </div>
+
+        {/* Right Side */}
         <div style={styles.rightSide}>
-          <h1 style={styles.welcomeText}>Welcome Back</h1>
+          <h1 style={styles.welcomeTextRight}>Welcome Back</h1>
         </div>
       </div>
     </GoogleOAuthProvider>
@@ -71,9 +74,9 @@ const styles = {
   },
   leftSide: {
     width: '40%',
-    padding: '40px',
+    backgroundColor: '#fff',  // Plain white background
+    padding: '20px',
     textAlign: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     borderRadius: '10px',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
   },
@@ -86,7 +89,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    opacity: 0.5,  // Set the image opacity for the translucent effect
+    opacity: 0.5,  // Translucent effect for the background
     borderRadius: '10px',
   },
   logo: {
@@ -113,8 +116,13 @@ const styles = {
   },
   welcomeText: {
     fontSize: '2.5rem',
-    color: '#fff',
+    color: '#003366',
     textTransform: 'uppercase',
+    fontWeight: 'bold',
+  },
+  welcomeTextRight: {
+    fontSize: '4rem', // Larger text for "Welcome Back"
+    color: '#fff', // Fully opaque
     fontWeight: 'bold',
   },
   logoutButton: {
