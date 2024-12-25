@@ -6,7 +6,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
-  const clientId = '892796370598-qlfs607hu2iipvunclhtr6td00r1qbi2.apps.googleusercontent.com'; // Replace with your OAuth Client ID
+  const clientId = '413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com'; // Replace with your OAuth Client ID
 
   const handleSuccess = (response) => {
     const decodedToken = JSON.parse(atob(response.credential.split('.')[1]));
