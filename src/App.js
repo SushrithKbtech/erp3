@@ -31,7 +31,7 @@ function App() {
       <div className="container">
         {/* Logo that redirects to the RV University website */}
         <a href="https://rvu.edu.in/" target="_blank" rel="noopener noreferrer">
-          <img src="/logo.png" alt="RV University Logo" className="logo" />
+          <img src="rvu-logo.png" alt="RV University Logo" className="logo" />
         </a>
 
         {!isLoggedIn ? (
@@ -66,85 +66,3 @@ function App() {
 }
 
 export default App;
-
-// Inline CSS styling for the app
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    background: 'linear-gradient(135deg, #4b6cb7, #182848)', // RV University-like color gradient
-    color: '#fff',
-    textAlign: 'center',
-  },
-  logo: {
-    width: '150px',
-    marginBottom: '40px',
-    cursor: 'pointer',
-  },
-  header: {
-    marginBottom: '20px',
-  },
-  title: {
-    fontSize: '3rem',
-    fontWeight: 'bold',
-    color: '#ffcc00', // RV University yellow
-  },
-  subtitle: {
-    fontSize: '1.5rem',
-    color: '#f4f4f4',
-    fontWeight: 'lighter',
-  },
-  error: {
-    color: '#ff6b6b',
-    fontSize: '1rem',
-    marginBottom: '20px',
-  },
-  loginBox: {
-    padding: '40px',
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    borderRadius: '15px',
-    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
-  },
-  googleLogin: {
-    background: '#ffcc00',
-    color: '#fff',
-    borderRadius: '5px',
-    border: 'none',
-    fontSize: '1.1rem',
-    padding: '15px 40px',
-    cursor: 'pointer',
-    transition: 'transform 0.3s ease, background-color 0.3s ease',
-  },
-  googleLoginHover: {
-    backgroundColor: '#f39c12',
-    transform: 'scale(1.05)',
-  },
-  userInfo: {
-    padding: '40px',
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    borderRadius: '15px',
-    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
-  },
-  email: {
-    color: '#ddd',
-    fontSize: '1.1rem',
-  },
-  logoutButton: {
-    marginTop: '20px',
-    padding: '10px 20px',
-    fontSize: '1rem',
-    color: '#fff',
-    backgroundColor: '#e74c3c',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s, transform 0.2s',
-  },
-  logoutButtonHover: {
-    backgroundColor: '#c0392b',
-    transform: 'scale(1.05)',
-  },
-};
