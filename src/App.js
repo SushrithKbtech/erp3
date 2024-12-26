@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import rvuLogo from './rvu-logo.png'; // Your RV logo
-import rvuBackground from './rvuni.png'; // Your background image
-import Dashboard  from './Dashboard';
+import Dashboard from './Dashboard';
+import ProtectedRoute from './ProtectedRoute';
+import rvuLogo from './rvu-logo.png';
+import rvuBackground from './rvuni.png';
 
 const clientId = '413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com';
 
-function LoginPage() {
-  const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleSuccess = (response) => {
-    const decodedToken = JSON.parse(atob(response.credential.split('.')[1]));
-    setUser(decodedToken);
-    setIsLoggedIn(true);
-    navigate('/dashboard'); // Navigate to the Dashboard page
+    try {
+      const decodedToken = JSON.parse(atob(response.credential.split('.')[1]));
+      console.log('User logged in:', decodedToken); // Debugging
+      setIsAuthenticated(true); // Mark user as authenticated
+    } catch (error) {
+      console.error('Failed to decode token:', error);
+    }
   };
 
   const handleFailure = () => {
@@ -25,36 +27,38 @@ function LoginPage() {
 
   return (
     <GoogleOAuthProvider clientId={clientId}>
-      <div style={styles.container}>
-        <div style={styles.box}>
-          <img
-            src={rvuLogo}
-            alt="RV University Logo"
-            style={styles.logo}
-            onClick={() => window.location.href = "https://rvu.edu.in/"}
+      <Router>
+        <Routes>
+          {/* Login Page */}
+          <Route
+            path="/"
+            element={
+              <div style={styles.container}>
+                <div style={styles.box}>
+                  <img
+                    src={rvuLogo}
+                    alt="RVU Logo"
+                    style={styles.logo}
+                    onClick={() => window.location.href = "https://rvu.edu.in/"}
+                  />
+                  <GoogleLogin onSuccess={handleSuccess} onError={handleFailure} />
+                </div>
+              </div>
+            }
           />
-          {!isLoggedIn && (
-            <GoogleLogin
-              onSuccess={handleSuccess}
-              onError={handleFailure}
-              theme="filled_blue"
-              size="large"
-            />
-          )}
-        </div>
-      </div>
-    </GoogleOAuthProvider>
-  );
-}
 
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-    </Router>
+          {/* Dashboard - Protected Route */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </GoogleOAuthProvider>
   );
 }
 
