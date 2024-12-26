@@ -1,0 +1,439 @@
+/* Modern CSS Reset and Variables */
+:root {
+    --primary-color: #C6A94F;
+    --secondary-color: #9B833C;
+    --bg-color: #1A1A1A;
+    --form-bg: rgba(28, 28, 28, 0.98);
+    --input-bg: rgba(38, 38, 38, 0.8);
+    --text-primary: #ffffff;
+    --text-secondary: #808080;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Enhanced Background and Container */
+body {
+    background: var(--bg-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    perspective: 1000px;
+    padding: 20px;
+}
+
+/* Improved Form Container with Glass Effect */
+.form-container {
+    padding: 0 40px 40px 40px;
+    background: var(--form-bg);
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transform-style: preserve-3d;
+    transition: var(--transition);
+    min-height: 600px;
+}
+
+.form-container:hover {
+    transform: translateY(-5px);
+}
+
+/* Enhanced Logo Container */
+.logo-container {
+    width: 100%;
+    padding: 40px 40px 20px 40px;
+    background: transparent;
+    border-bottom: 1px solid rgba(198, 169, 79, 0.1);
+    margin-bottom: 30px;
+}
+
+/* Logo with Advanced Effects */
+.logo {
+    width: 100%;
+    max-width: 400px;
+    height: 200px;
+    margin: 10px auto 5px auto;
+}
+
+.logo:hover {
+    transform: translateZ(10px) scale(1.01);
+    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Logo Container Background Effect */
+.logo-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(212, 175, 55, 0.1),
+        transparent
+    );
+    animation: shine 3s infinite;
+}
+
+/* Enhanced Button Styles */
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    background: transparent;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+}
+
+.btn.active {
+    background: var(--primary-color);
+    color: #000000;
+    font-weight: 500;
+}
+
+.btn:not(.active) {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+/* Enhanced Input Fields */
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    background: rgba(38, 38, 38, 0.8);
+    border: none;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.input-group input::placeholder {
+    color: var(--text-secondary);
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+}
+
+/* Remember Me and Forgot Password */
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-primary);
+}
+
+.forgot-password {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary-color);
+    color: #000000;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.submit-btn::after {
+    content: '→';
+    margin-left: 8px;
+}
+
+/* Form Container */
+.form-container {
+    background: var(--form-bg);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+    .logo {
+        max-width: 300px;
+    }
+    
+    .form-container {
+        padding: 15px;
+    }
+    
+    .button-group {
+        flex-direction: row;
+    }
+}
+
+/* Checkbox Styling */
+input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--text-secondary);
+    border-radius: 4px;
+    margin-right: 8px;
+    position: relative;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    color: #000000;
+    font-size: 12px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Animations */
+@keyframes logoEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%);
+    }
+    20%, 100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Additional Animations for Form Elements */
+.form {
+    animation: formSlide 0.6s ease-out;
+}
+
+@keyframes formSlide {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Enhanced Focus States */
+input:focus {
+    outline: none;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+    }
+}
+
+/* Section Headings */
+h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+/* Separator Styling */
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 30px 0;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(198, 169, 79, 0.2);
+}
+
+.separator span {
+    padding: 0 15px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Create Account Section */
+.create-account-section {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.create-account-section p {
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+.create-account-btn {
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.create-account-btn:hover {
+    background: rgba(198, 169, 79, 0.1);
+    transform: translateY(-2px);
+}
+
+.create-account-btn i {
+    font-size: 1.1rem;
+}
+
+/* Update existing form-container padding */
+.form-container {
+    padding: 0 40px 40px 40px;
+}
+
+/* Login Section */
+.login-section {
+    margin-bottom: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+    .form-container {
+        padding: 0 20px 30px 20px;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+    
+    .separator {
+        margin: 25px 0;
+    }
+}
+
+/* Animation for Create Account Button */
+.create-account-btn::after {
+    content: '→';
+    opacity: 0;
+    margin-left: -10px;
+    transition: all 0.3s ease;
+}
+
+.create-account-btn:hover::after {
+    opacity: 1;
+    margin-left: 8px;
+}
+
+/* Enhanced Focus States */
+.create-account-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(198, 169, 79, 0.3);
+}
+
+/* Add these new styles */
+.hidden {
+    display: none;
+}
+
+.signup-section {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Update existing styles */
+.input-group input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px #c6a94f1a;
+}
