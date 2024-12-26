@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import rvuLogo from './rvu-logo.png'; // Your RV logo
 import rvuBackground from './rvuni.png'; // Your background image
+import Dashboard  from './Dashboard';
 
 const clientId = '413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com';
 
@@ -46,14 +47,6 @@ function LoginPage() {
   );
 }
 
-function Dashboard() {
-  return (
-    <div style={styles.dashboard}>
-      <h1>Dashboard</h1>
-    </div>
-  );
-}
-
 function App() {
   return (
     <Router>
@@ -90,16 +83,6 @@ const styles = {
     marginBottom: '20px',
     cursor: 'pointer',
     transition: 'transform 0.3s',
-  },
-  dashboard: {
-    height: '100vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#121212',
-    color: 'white',
-    fontSize: '3rem',
-    fontWeight: 'bold',
   },
 };
 
