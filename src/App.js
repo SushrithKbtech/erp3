@@ -10,10 +10,19 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 // Dummy Dashboard Component
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated');
+    navigate('/'); // Redirect to login
+  };
+
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h1>Welcome to the Dashboard!</h1>
-      <p>You are successfully logged in.</p>
+      <button onClick={handleLogout} style={styles.button}>
+        Logout
+      </button>
     </div>
   );
 };
@@ -21,7 +30,6 @@ const Dashboard = () => {
 // Main App Component
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    // Retrieve from localStorage
     return localStorage.getItem('isAuthenticated') === 'true';
   });
 
@@ -45,13 +53,14 @@ const App = () => {
     alert('Failed to log in. Please try again.');
   };
 
-  // Protected Route
+  // Protected Route Component
   const ProtectedRoute = ({ children }) => {
     const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
     return isAuthenticated ? children : <Navigate to="/" />;
   };
 
   useEffect(() => {
+    // Sync state with localStorage
     setIsAuthenticated(localStorage.getItem('isAuthenticated') === 'true');
   }, []);
 
@@ -76,7 +85,7 @@ const App = () => {
           }
         />
 
-        {/* Dashboard */}
+        {/* Dashboard Route (Protected) */}
         <Route
           path="/Dashboard"
           element={
@@ -116,6 +125,15 @@ const styles = {
     marginBottom: '20px',
     cursor: 'pointer',
     transition: 'transform 0.3s',
+  },
+  button: {
+    padding: '10px 20px',
+    backgroundColor: '#007bff',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    fontSize: '16px',
   },
 };
 
