@@ -29,30 +29,39 @@ function App() {
     <GoogleOAuthProvider clientId={clientId}>
       <div style={styles.container}>
         <div style={styles.leftSection}>
-          <h1 style={styles.welcomeText}>Welcome Back</h1>
-          {!isLoggedIn ? (
-            <GoogleLogin 
-              onSuccess={handleSuccess} 
-              onError={handleFailure} 
-              theme="filled_blue" 
-              size="large" 
+          <div style={styles.box}>
+            <img 
+              src={rvuLogo} 
+              alt="RV University Logo" 
+              style={styles.logo}
+              onClick={() => window.location.href = "https://rvu.edu.in/"} 
             />
-          ) : (
-            <div style={styles.welcomeContainer}>
-              <h2 style={styles.welcomeText}>Welcome Back, {user.name}!</h2>
-              <button style={styles.logoutButton} onClick={handleLogout}>
-                Logout
-              </button>
-            </div>
-          )}
+            {!isLoggedIn ? (
+              <GoogleLogin 
+                onSuccess={handleSuccess} 
+                onError={handleFailure} 
+                theme="filled_blue" 
+                size="large" 
+              />
+            ) : (
+              <div style={styles.welcomeContainer}>
+                <h2 style={styles.welcomeText}>Welcome Back, {user.name}!</h2>
+                <button style={styles.logoutButton} onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
         </div>
         <div style={styles.rightSection}>
-          <img src={rvuLogo} alt="RV University Logo" style={styles.logo} />
-          <div style={styles.admissionsText}>
-            <h2>New-Age Global University for Liberal Education</h2>
-            <h1>ADMISSIONS OPEN 2025</h1>
-            <p>For all programmes</p>
-            <button style={styles.applyButton}>Apply Now</button>
+          <div style={styles.overlay}>
+            <img src={rvuLogo} alt="RV University Logo" style={styles.logo} />
+            <div style={styles.admissionsText}>
+              <h2 style={styles.subtitle}>New-Age Global University for Liberal Education</h2>
+              <h1 style={styles.title}>ADMISSIONS OPEN 2025</h1>
+              <p style={styles.description}>For all programmes</p>
+              <button style={styles.applyButton}>Apply Now</button>
+            </div>
           </div>
         </div>
       </div>
@@ -67,43 +76,57 @@ const styles = {
     backgroundImage: `url(${rvuBackground})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    backgroundBlendMode: 'overlay',
   },
   leftSection: {
-    flex: 1,
+    flex: 1.5,
     display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    background: 'linear-gradient(135deg, #003366, #D4AF37)',
+  },
+  box: {
+    width: '350px',
     padding: '20px',
-    borderRadius: '10px',
-    margin: '20px',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: '15px',
+    textAlign: 'center',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
   },
   rightSection: {
     flex: 1,
     display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '20px',
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  overlay: {
+    textAlign: 'center',
     color: '#fff',
+    padding: '20px',
   },
   logo: {
-    width: '150px',
+    width: '120px',
     marginBottom: '20px',
   },
   admissionsText: {
     textAlign: 'center',
   },
-  welcomeText: {
-    fontSize: '2rem',
-    color: '#003366',
+  subtitle: {
+    fontSize: '1.2rem',
+    marginBottom: '10px',
+  },
+  title: {
+    fontSize: '2.5rem',
+    fontWeight: 'bold',
+    marginBottom: '10px',
+  },
+  description: {
+    fontSize: '1rem',
     marginBottom: '20px',
   },
   applyButton: {
-    marginTop: '20px',
+    marginTop: '10px',
     padding: '10px 20px',
     backgroundColor: '#D4AF37',
     color: '#fff',
@@ -111,6 +134,11 @@ const styles = {
     borderRadius: '5px',
     fontSize: '1rem',
     cursor: 'pointer',
+  },
+  welcomeText: {
+    fontSize: '1.5rem',
+    color: '#003366',
+    fontWeight: 'bold',
   },
   logoutButton: {
     marginTop: '20px',
