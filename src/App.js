@@ -1,276 +1,91 @@
-import React from "react";
+import React, { useEffect } from 'react';
+import './upstyle.css';
+import './upscript.js';
 
-function App() {
-  return (
-    <div style={styles.dashboardContainer}>
-      {/* Left Section */}
-      <div style={styles.dashboardLeft}>
-        <div style={styles.profileCard}>
-          <div style={styles.profileHeader}>
-            <div style={styles.profilePictureContainer}>
-              <img
-                src="https://via.placeholder.com/80"
-                alt="Profile"
-                style={styles.profilePicture}
-              />
-            </div>
-            <div>
-              <h3 style={styles.profileName}>Hey, Alex</h3>
-              <p style={styles.profileId}>ID: 12100330</p>
-            </div>
-          </div>
-          <div style={styles.profileDetails}>
-            <p>
-              <strong>Course:</strong> BTech, Computer Science & Engineering
-            </p>
-            <p>
-              <strong>DOB:</strong> 29-Feb-2020
-            </p>
-            <p>
-              <strong>Contact:</strong> 1234567890
-            </p>
-            <p>
-              <strong>Email:</strong> unknown@gmail.com
-            </p>
-            <p>
-              <strong>Address:</strong> Ghost town Road, New York, America
-            </p>
-          </div>
-        </div>
-      </div>
+const App = () => {
 
-      {/* Center Section */}
-      <div style={styles.dashboardCenter}>
-        <h2 style={styles.sectionHeader}>
-          Attendance
-          <div style={styles.goldLine}></div>
-        </h2>
-        <div style={styles.attendanceCards}>
-          {[
-            { subject: "Engineering Graphics", percentage: 86, count: "12/14" },
-            { subject: "Mathematical Engineering", percentage: 93, count: "27/29" },
-            { subject: "Computer Architecture", percentage: 81, count: "27/30" },
-            { subject: "Database Management", percentage: 96, count: "24/25" },
-            { subject: "Network Security", percentage: 92, count: "25/27" },
-          ].map((item, index) => (
-            <div key={index} style={styles.attendanceCard}>
-              <div style={styles.circleGraph}>
-                <svg style={styles.progressRing} width="80" height="80">
-                  {/* Background Circle */}
-                  <circle
-                    cx="40"
-                    cy="40"
-                    r="36"
-                    stroke="#555"
-                    strokeWidth="8"
-                    fill="transparent"
-                  />
-                  {/* Progress Circle */}
-                  <circle
-                    cx="40"
-                    cy="40"
-                    r="36"
-                    stroke="#FFD700"
-                    strokeWidth="8"
-                    fill="transparent"
-                    strokeDasharray="226.2"
-                    strokeDashoffset={`${
-                      226.2 - (226.2 * item.percentage) / 100
-                    }`}
-                  />
-                </svg>
-                {/* Percentage Inside the Circle */}
-                <div style={styles.circlePercentage}>
-                  <span>{item.percentage}%</span>
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = './upscript.js';
+        script.async = true;
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+
+    return (
+        <div>
+            <header className="header">
+                <nav className="nav">
+                    <img src="/static/images/logo.png" alt="RV University Logo" className="nav__logo" style={{ height: '5rem' }} />
+                    <ul className="nav__links">
+                        <li className="nav__item"><a className="nav__link" href="#section--1">Features</a></li>
+                        <li className="nav__item"><a className="nav__link" href="#section--2">Methods</a></li>
+                        <li className="nav__item"><a className="nav__link" href="#section--3">Teachers</a></li>
+                        <li className="nav__item"><a className="nav__link" href="/upload"><i className="bi bi-cloud-upload"></i> Upload Portfolio</a></li>
+                        <li className="nav__item"><a className="nav__link" href="/view_files">View uploads</a></li>
+                        <li className="nav__item"><a className="nav__link" href="/chatbot">AI Assistant</a></li>
+                        <li className="nav__item"><a className="nav__link nav__link--profile" href="/"><i className="bi bi-person-circle"></i> Logout</a></li>
+                    </ul>
+                </nav>
+
+                <div className="header__title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', position: 'relative' }}>
+                    <div style={{ maxWidth: '600px' }}>
+                        <h1>Where <span className="highlight" style={{ color: '#f5ba13' }}>knowledge</span> meets<br /><span className="highlight" style={{ color: '#f5ba13' }}>opportunity</span></h1>
+                        <h4>A transformative data collection tool for a smoother experience.</h4>
+                        <button className="btn--text btn--scroll-to" style={{ marginTop: '1rem', background: '#f5ba13', color: 'black', border: 'none', padding: '10px 20px', borderRadius: '5px', cursor: 'pointer' }}>Learn more ↓</button>
+                    </div>
+                    <div>
+                        <img src="https://rvu.edu.in/images/1c9bfffe1d3c301e920a2e640f9eebe9.jpg" 
+                             alt="Where Knowledge Meets Opportunity" 
+                             style={{ width: '500px', height: 'auto', objectFit: 'cover', marginLeft: '50px', borderRadius: '10px' }} />
+                    </div>
                 </div>
-              </div>
-              <h3 style={styles.whiteText}>{item.subject}</h3>
-              <p style={styles.whiteText}>{item.count}</p>
-            </div>
-          ))}
-        </div>
-        <h2 style={styles.sectionHeader}>
-          Today's Timetable
-          <div style={styles.goldLine}></div>
-        </h2>
-        <table style={styles.timetable}>
-          <thead>
-            <tr style={styles.timetableRow}>
-              <th style={styles.whiteText}>Time</th>
-              <th style={styles.whiteText}>Room No.</th>
-              <th style={styles.whiteText}>Subject</th>
-              <th style={styles.whiteText}>Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              { time: "10-11 AM", room: "33-309", subject: "DBMS130", type: "Lecture" },
-              { time: "11-12 AM", room: "38-719", subject: "CS200", type: "Lecture" },
-              { time: "01-02 PM", room: "33-309", subject: "MTH866", type: "Lecture" },
-            ].map((row, index) => (
-              <tr key={index} style={styles.timetableRow}>
-                <td style={styles.whiteText}>{row.time}</td>
-                <td style={styles.whiteText}>{row.room}</td>
-                <td style={styles.whiteText}>{row.subject}</td>
-                <td style={styles.whiteText}>{row.type}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </header>
 
-      {/* Right Section */}
-      <div style={styles.dashboardRight}>
-        <div style={styles.rightCard}>
-          <h2 style={styles.sectionHeader}>
-            Announcements
-            <div style={styles.goldLine}></div>
-          </h2>
-          <p style={styles.whiteText}>
-            <strong>Academic:</strong> Summer training internship with Live Projects.
-          </p>
-          <p style={styles.whiteText}>
-            <strong>Co-curricular:</strong> Global internship opportunity by Student Organization.
-          </p>
-          <p style={styles.whiteText}>
-            <strong>Examination:</strong> Instructions for Mid Term Examination.
-          </p>
-        </div>
-        <div style={styles.rightCard}>
-          <h2 style={styles.sectionHeader}>
-            Teachers on Leave
-            <div style={styles.goldLine}></div>
-          </h2>
-          <ul>
-            <li style={styles.whiteText}>The Professor - Full Day</li>
-            <li style={styles.whiteText}>Lisa Manobal - Half Day</li>
-            <li style={styles.whiteText}>Himanshu Jindal - Full Day</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-}
+            <section className="section" id="section--1">
+                <div className="section__title">
+                    <h2 className="section__description">Features</h2>
+                    <h3 className="section__header">Everything you have done in one place</h3>
+                </div>
 
-const styles = {
-  dashboardContainer: {
-    display: "flex",
-    height: "100vh",
-    padding: "20px",
-    gap: "20px",
-    background: "#000000",
-    color: "#FFFFFF",
-  },
-  dashboardLeft: {
-    flex: 1,
-    padding: "20px",
-    borderRadius: "20px",
-    background: "#333333",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  },
-  profileCard: {
-    textAlign: "left",
-  },
-  profileHeader: {
-    display: "flex",
-    alignItems: "center",
-    gap: "15px",
-  },
-  profilePictureContainer: {
-    width: "80px",
-    height: "80px",
-    borderRadius: "50%",
-    overflow: "hidden",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-  },
-  profilePicture: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-  },
-  profileName: {
-    margin: 0,
-    color: "#FFD700",
-  },
-  dashboardCenter: {
-    flex: 2,
-    padding: "20px",
-    borderRadius: "20px",
-    background: "#333333",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  },
-  sectionHeader: {
-    color: "#FFFFFF",
-    position: "relative",
-    marginBottom: "10px",
-  },
-  goldLine: {
-    content: '""',
-    display: "block",
-    width: "60px",
-    height: "4px",
-    backgroundColor: "#FFD700",
-    borderRadius: "2px",
-    marginTop: "5px",
-    marginLeft: "0",
-  },
-  attendanceCards: {
-    display: "flex",
-    justifyContent: "space-between",
-    margin: "20px 0",
-  },
-  attendanceCard: {
-    flex: 1,
-    margin: "0 10px",
-    textAlign: "center",
-    background: "#555555",
-    borderRadius: "15px",
-    padding: "15px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  },
-  circleGraph: {
-    position: "relative",
-    width: "80px",
-    height: "80px",
-    margin: "0 auto",
-  },
-  progressRing: {
-    transform: "rotate(-90deg)",
-  },
-  timetable: {
-    width: "100%",
-    borderCollapse: "collapse",
-    marginTop: "20px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    borderRadius: "15px",
-    overflow: "hidden",
-  },
-  circlePercentage: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    fontWeight: "bold",
-    fontSize: "1rem",
-    color: "#FFD700",
-  },
-  dashboardRight: {
-    flex: 1,
-    padding: "20px",
-    borderRadius: "20px",
-    background: "#333333",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  },
-  rightCard: {
-    padding: "15px",
-    background: "#555555",
-    borderRadius: "15px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    marginBottom: "20px",
-  },
-  whiteText: {
-    color: "#FFFFFF",
-  },
+                <div className="features">
+                    <img src="/static/images/digital-lazy.jpg" data-src="/static/images/digital.jpg" alt="Computer" className="features__img lazy-img" />
+                    <div className="features__feature">
+                        <div className="features__icon">
+                            <svg><use xlinkHref="/static/images/icons.svg#icon-monitor"></use></svg>
+                        </div>
+                        <h5 className="features__header">100% digital portfolio</h5>
+                        <p>A digital portfolio showcases your achievements, skills, and experiences in a modern, interactive format.</p>
+                    </div>
+
+                    <div className="features__feature">
+                        <div className="features__icon">
+                            <svg><use xlinkHref="/static/images/icons.svg#icon-trending-up"></use></svg>
+                        </div>
+                        <h5 className="features__header">Show your work</h5>
+                        <p>Display your projects, achievements, and growth in an engaging way, creating a compelling narrative of your journey.</p>
+                    </div>
+
+                    <img src="https://media.licdn.com/dms/image/D4D12AQEpMIZ1AwexTg/article-cover_image-shrink_720_1280/0/1680395555740?e=2147483647&v=beta&t=pdqmQ6OeeB97TBz-6PMNCuvuD8-Rdk6yMMLGrVb5pps" data-src="https://media.licdn.com/dms/image/D4D12AQEpMIZ1AwexTg/article-cover_image-shrink_720_1280/0/1680395555740?e=2147483647&v=beta&t=pdqmQ6OeeB97TBz-6PMNCuvuD8-Rdk6yMMLGrVb5pps" alt="Teacher Validation" className="features__img lazy-img" />
+
+                    <img src="/static/images/Untitled design (7).png" data-src="/static/images/Untitled design (7).png" alt="Portfolio Growth" className="features__img lazy-img" />
+
+                    <div className="features__feature">
+                        <div className="features__icon">
+                            <svg><use xlinkHref="/static/images/icons.svg#icon-credit-card"></use></svg>
+                        </div>
+                        <h5 className="features__header">Teacher Validation</h5>
+                        <p>Get your work validated by experienced teachers and mentors, adding credibility to your achievements.</p>
+                    </div>
+                </div>
+            </section>
+
+            {/* Additional sections and footer */}
+        </div>
+    );
 };
 
 export default App;
