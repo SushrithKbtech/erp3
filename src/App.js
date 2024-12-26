@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import Dashboard from './Dashboard.jsx';
-import ProtectedRoute from './ProtectedRoute.jsx';
+import Dashboard from './Dashboard';
 import rvuLogo from './rvu-logo.png';
 import rvuBackground from './rvuni.png';
 
 const clientId = '413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem('isAuthenticated') === 'true';
+  });
 
   const handleSuccess = (response) => {
     try {
       const decodedToken = JSON.parse(atob(response.credential.split('.')[1]));
       console.log('User logged in:', decodedToken); // Debugging
       setIsAuthenticated(true); // Mark user as authenticated
+      localStorage.setItem('isAuthenticated', 'true'); // Persist state
     } catch (error) {
       console.error('Failed to decode token:', error);
     }
@@ -24,6 +26,15 @@ function App() {
   const handleFailure = () => {
     alert('Failed to log in. Please try again.');
   };
+
+  const ProtectedRoute = ({ children }) => {
+    return isAuthenticated ? children : <Navigate to="/" />;
+  };
+
+  useEffect(() => {
+    // Sync state with localStorage in case of manual edits
+    setIsAuthenticated(localStorage.getItem('isAuthenticated') === 'true');
+  }, []);
 
   return (
     <GoogleOAuthProvider clientId={clientId}>
@@ -39,7 +50,7 @@ function App() {
                     src={rvuLogo}
                     alt="RVU Logo"
                     style={styles.logo}
-                    onClick={() => window.location.href = "https://rvu.edu.in/"}
+                    onClick={() => (window.location.href = 'https://rvu.edu.in/')}
                   />
                   <GoogleLogin onSuccess={handleSuccess} onError={handleFailure} />
                 </div>
@@ -49,9 +60,9 @@ function App() {
 
           {/* Dashboard - Protected Route */}
           <Route
-            path="/dashboard"
+            path="/Dashboard"
             element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <ProtectedRoute>
                 <Dashboard />
               </ProtectedRoute>
             }
