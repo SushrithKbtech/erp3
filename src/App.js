@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import rvuLogo from './rvu-logo.png';  // Your RV logo
-import rvuBackground from './rvuni.png';  // Your background image
+import rvuLogo from './rvu-logo.png'; // Your RV logo
+import rvuBackground from './rvuni.png'; // Your background image
 
 // Replace with your OAuth Client ID
 const clientId = '413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com';
@@ -28,9 +28,8 @@ function App() {
   return (
     <GoogleOAuthProvider clientId={clientId}>
       <div style={styles.container}>
-        {/* Left Side */}
-        <div style={styles.leftSide}>
-          {/* RV University Logo */}
+        {/* Central Box */}
+        <div style={styles.box}>
           <img 
             src={rvuLogo} 
             alt="RV University Logo" 
@@ -43,7 +42,6 @@ function App() {
               onError={handleFailure} 
               theme="filled_blue" 
               size="large" 
-              style={styles.googleButton}
             />
           ) : (
             <div style={styles.welcomeContainer}>
@@ -54,11 +52,6 @@ function App() {
             </div>
           )}
         </div>
-
-        {/* Right Side */}
-        <div style={styles.rightSide}>
-          <h1 style={styles.welcomeTextRight}>Welcome Back</h1>
-        </div>
       </div>
     </GoogleOAuthProvider>
   );
@@ -66,31 +59,21 @@ function App() {
 
 const styles = {
   container: {
-    display: 'flex',
     height: '100vh',
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    background: 'linear-gradient(135deg, #003366, #D4AF37)',  // Gold and Dark Blue gradient
-  },
-  leftSide: {
-    width: '40%',
-    backgroundColor: '#fff',  // Plain white background
-    padding: '20px',
-    textAlign: 'center',
-    borderRadius: '10px',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-  },
-  rightSide: {
-    width: '60%',
     backgroundImage: `url(${rvuBackground})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    opacity: 0.5,  // Translucent effect for the background
-    borderRadius: '10px',
+  },
+  box: {
+    width: '400px',
+    padding: '30px',
+    backgroundColor: '#fff',
+    borderRadius: '15px',
+    textAlign: 'center',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
   },
   logo: {
     width: '150px',
@@ -98,31 +81,14 @@ const styles = {
     cursor: 'pointer',
     transition: 'transform 0.3s',
   },
-  googleButton: {
-    backgroundColor: '#D4AF37', // Golden color for Google button
-    color: '#fff',
-    padding: '12px 30px',
-    fontSize: '1.2rem',
-    borderRadius: '5px',
-    border: 'none',
-    cursor: 'pointer',
-    marginTop: '20px',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-    transition: 'background-color 0.3s, transform 0.2s',
-  },
   welcomeContainer: {
     textAlign: 'center',
     color: '#003366',
   },
   welcomeText: {
-    fontSize: '2.5rem',
+    fontSize: '1.5rem',
     color: '#003366',
     textTransform: 'uppercase',
-    fontWeight: 'bold',
-  },
-  welcomeTextRight: {
-    fontSize: '4rem', // Larger text for "Welcome Back"
-    color: '#fff', // Fully opaque
     fontWeight: 'bold',
   },
   logoutButton: {
