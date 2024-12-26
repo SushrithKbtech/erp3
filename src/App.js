@@ -1,40 +1,15 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import Dashboard from './Dashboard';
+import Dashboard from './Dashboard.jsx';
+import ProtectedRoute from './ProtectedRoute.jsx';
 import rvuLogo from './rvu-logo.png';
 import rvuBackground from './rvuni.png';
 
 const clientId = '413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com';
 
-// Create Authentication Context
-const AuthContext = createContext();
-
-export const useAuth = () => useContext(AuthContext);
-
-const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem('isAuthenticated') === 'true';
-  });
-
-  useEffect(() => {
-    localStorage.setItem('isAuthenticated', isAuthenticated);
-  }, [isAuthenticated]);
-
-  return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
-
-function ProtectedRoute({ children }) {
-  const { isAuthenticated } = useAuth();
-  return isAuthenticated ? children : <Navigate to="/" />;
-}
-
 function App() {
-  const { setIsAuthenticated } = useAuth();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleSuccess = (response) => {
     try {
@@ -64,7 +39,7 @@ function App() {
                     src={rvuLogo}
                     alt="RVU Logo"
                     style={styles.logo}
-                    onClick={() => (window.location.href = 'https://rvu.edu.in/')}
+                    onClick={() => window.location.href = "https://rvu.edu.in/"}
                   />
                   <GoogleLogin onSuccess={handleSuccess} onError={handleFailure} />
                 </div>
@@ -74,9 +49,9 @@ function App() {
 
           {/* Dashboard - Protected Route */}
           <Route
-            path="/Dashboard"
+            path="/dashboard"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
                 <Dashboard />
               </ProtectedRoute>
             }
@@ -115,8 +90,4 @@ const styles = {
   },
 };
 
-export default () => (
-  <AuthProvider>
-    <App />
-  </AuthProvider>
-);
+export default App;
