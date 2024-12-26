@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import rvuLogo from './rvu-logo.png'; // Your RV logo
-import rvuBackground from './rvuni.png'; // Your background image
+import rvuBackground from './stud.jpg'; // Your background image
 
 // Replace with your OAuth Client ID
 const clientId = '413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com';
