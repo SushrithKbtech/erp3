@@ -43,7 +43,7 @@ function App() {
       <div style={styles.dashboardCenter}>
         <h2 style={styles.sectionHeader}>
           Attendance
-          <div style={styles.yellowLine}></div>
+          <div style={styles.goldLine}></div>
         </h2>
         <div style={styles.attendanceCards}>
           {[
@@ -70,7 +70,7 @@ function App() {
                     cx="40"
                     cy="40"
                     r="36"
-                    stroke="#FFFF00"
+                    stroke="#FFD700"
                     strokeWidth="8"
                     fill="transparent"
                     strokeDasharray="226.2"
@@ -91,7 +91,7 @@ function App() {
         </div>
         <h2 style={styles.sectionHeader}>
           Today's Timetable
-          <div style={styles.yellowLine}></div>
+          <div style={styles.goldLine}></div>
         </h2>
         <table style={styles.timetable}>
           <thead>
@@ -124,7 +124,7 @@ function App() {
         <div style={styles.rightCard}>
           <h2 style={styles.sectionHeader}>
             Announcements
-            <div style={styles.yellowLine}></div>
+            <div style={styles.goldLine}></div>
           </h2>
           <p style={styles.whiteText}>
             <strong>Academic:</strong> Summer training internship with Live Projects.
@@ -139,7 +139,7 @@ function App() {
         <div style={styles.rightCard}>
           <h2 style={styles.sectionHeader}>
             Teachers on Leave
-            <div style={styles.yellowLine}></div>
+            <div style={styles.goldLine}></div>
           </h2>
           <ul>
             <li style={styles.whiteText}>The Professor - Full Day</li>
@@ -190,7 +190,7 @@ const styles = {
   },
   profileName: {
     margin: 0,
-    color: "#FFFF00",
+    color: "#FFD700",
   },
   dashboardCenter: {
     flex: 2,
@@ -204,12 +204,12 @@ const styles = {
     position: "relative",
     marginBottom: "10px",
   },
-  yellowLine: {
+  goldLine: {
     content: '""',
     display: "block",
     width: "60px",
     height: "4px",
-    backgroundColor: "#FFFF00",
+    backgroundColor: "#FFD700",
     borderRadius: "2px",
     marginTop: "5px",
     marginLeft: "0",
@@ -252,7 +252,7 @@ const styles = {
     transform: "translate(-50%, -50%)",
     fontWeight: "bold",
     fontSize: "1rem",
-    color: "#FFFF00",
+    color: "#FFD700",
   },
   dashboardRight: {
     flex: 1,
