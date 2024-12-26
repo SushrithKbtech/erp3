@@ -1,35 +1,51 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+} from 'react-router-dom';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import Dashboard from './Dashboard';
-import rvuLogo from './rvu-logo.png';
-import rvuBackground from './rvuni.png';
 
-const clientId = '413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com';
+// Dummy Dashboard Component
+const Dashboard = () => {
+  return (
+    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+      <h1>Welcome to the Dashboard!</h1>
+      <p>You are successfully logged in.</p>
+    </div>
+  );
+};
 
-function App() {
+// Main App Component
+const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    // Retrieve from localStorage
     return localStorage.getItem('isAuthenticated') === 'true';
   });
 
   const navigate = useNavigate();
 
+  // Handle Google Login Success
   const handleSuccess = (response) => {
     try {
       const decodedToken = JSON.parse(atob(response.credential.split('.')[1]));
       console.log('User logged in:', decodedToken);
       setIsAuthenticated(true);
       localStorage.setItem('isAuthenticated', 'true'); // Persist login
-      navigate('/Dashboard'); // Navigate to Dashboard
+      navigate('/Dashboard'); // Redirect to Dashboard
     } catch (error) {
       console.error('Failed to decode token:', error);
     }
   };
 
+  // Handle Google Login Failure
   const handleFailure = () => {
     alert('Failed to log in. Please try again.');
   };
 
+  // Protected Route
   const ProtectedRoute = ({ children }) => {
     const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
     return isAuthenticated ? children : <Navigate to="/" />;
@@ -40,47 +56,48 @@ function App() {
   }, []);
 
   return (
-    <GoogleOAuthProvider clientId={clientId}>
-      <div>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div style={styles.container}>
-                <div style={styles.box}>
-                  <img
-                    src={rvuLogo}
-                    alt="RVU Logo"
-                    style={styles.logo}
-                    onClick={() => (window.location.href = 'https://rvu.edu.in/')}
-                  />
-                  <GoogleLogin onSuccess={handleSuccess} onError={handleFailure} />
-                </div>
+    <GoogleOAuthProvider clientId="413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com">
+      <Routes>
+        {/* Login Page */}
+        <Route
+          path="/"
+          element={
+            <div style={styles.container}>
+              <div style={styles.box}>
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/a/af/University_logo_example.png"
+                  alt="RVU Logo"
+                  style={styles.logo}
+                  onClick={() => (window.location.href = 'https://rvu.edu.in/')}
+                />
+                <GoogleLogin onSuccess={handleSuccess} onError={handleFailure} />
               </div>
-            }
-          />
+            </div>
+          }
+        />
 
-          <Route
-            path="/Dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </div>
+        {/* Dashboard */}
+        <Route
+          path="/Dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
     </GoogleOAuthProvider>
   );
-}
+};
 
+// CSS Styles
 const styles = {
   container: {
     height: '100vh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundImage: `url(${rvuBackground})`,
+    backgroundImage: 'url("https://via.placeholder.com/1200x800")',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -102,4 +119,8 @@ const styles = {
   },
 };
 
-export default App;
+export default () => (
+  <Router>
+    <App />
+  </Router>
+);
