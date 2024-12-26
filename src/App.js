@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import Dashboard from './Dashboard';
 import rvuLogo from './rvu-logo.png';
@@ -12,12 +12,15 @@ function App() {
     return localStorage.getItem('isAuthenticated') === 'true';
   });
 
+  const navigate = useNavigate();
+
   const handleSuccess = (response) => {
     try {
       const decodedToken = JSON.parse(atob(response.credential.split('.')[1]));
-      console.log('User logged in:', decodedToken); // Debugging
-      setIsAuthenticated(true); // Mark user as authenticated
-      localStorage.setItem('isAuthenticated', 'true'); // Persist state
+      console.log('User logged in:', decodedToken);
+      setIsAuthenticated(true);
+      localStorage.setItem('isAuthenticated', 'true'); // Persist login
+      navigate('/Dashboard'); // Navigate to Dashboard
     } catch (error) {
       console.error('Failed to decode token:', error);
     }
@@ -28,19 +31,18 @@ function App() {
   };
 
   const ProtectedRoute = ({ children }) => {
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
     return isAuthenticated ? children : <Navigate to="/" />;
   };
 
   useEffect(() => {
-    // Sync state with localStorage in case of manual edits
     setIsAuthenticated(localStorage.getItem('isAuthenticated') === 'true');
   }, []);
 
   return (
     <GoogleOAuthProvider clientId={clientId}>
-      <Router>
+      <div>
         <Routes>
-          {/* Login Page */}
           <Route
             path="/"
             element={
@@ -58,7 +60,6 @@ function App() {
             }
           />
 
-          {/* Dashboard - Protected Route */}
           <Route
             path="/Dashboard"
             element={
@@ -68,7 +69,7 @@ function App() {
             }
           />
         </Routes>
-      </Router>
+      </div>
     </GoogleOAuthProvider>
   );
 }
