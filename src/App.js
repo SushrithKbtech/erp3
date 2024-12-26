@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import rvuLogo from './rvu-logo.png'; // Your RV logo
-import rvuBackground from './uni.jpg'; // Your background image
+import rvuBackground from './rvuni.png'; // Your background image
 
 // Replace with your OAuth Client ID
 const clientId = '413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com';
@@ -28,14 +28,8 @@ function App() {
   return (
     <GoogleOAuthProvider clientId={clientId}>
       <div style={styles.container}>
-        {/* Central Box */}
-        <div style={styles.box}>
-          <img 
-            src={rvuLogo} 
-            alt="RV University Logo" 
-            style={styles.logo}
-            onClick={() => window.location.href = "https://rvu.edu.in/"} 
-          />
+        <div style={styles.leftSection}>
+          <h1 style={styles.welcomeText}>Welcome Back</h1>
           {!isLoggedIn ? (
             <GoogleLogin 
               onSuccess={handleSuccess} 
@@ -52,6 +46,15 @@ function App() {
             </div>
           )}
         </div>
+        <div style={styles.rightSection}>
+          <img src={rvuLogo} alt="RV University Logo" style={styles.logo} />
+          <div style={styles.admissionsText}>
+            <h2>New-Age Global University for Liberal Education</h2>
+            <h1>ADMISSIONS OPEN 2025</h1>
+            <p>For all programmes</p>
+            <button style={styles.applyButton}>Apply Now</button>
+          </div>
+        </div>
       </div>
     </GoogleOAuthProvider>
   );
@@ -59,50 +62,65 @@ function App() {
 
 const styles = {
   container: {
-    height: '100vh',
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: '100vh',
     backgroundImage: `url(${rvuBackground})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     backgroundBlendMode: 'overlay',
   },
-  box: {
-    width: '400px',
-    padding: '30px',
+  leftSection: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    borderRadius: '15px',
-    textAlign: 'center',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    padding: '20px',
+    borderRadius: '10px',
+    margin: '20px',
+  },
+  rightSection: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '20px',
+    color: '#fff',
   },
   logo: {
     width: '150px',
     marginBottom: '20px',
-    cursor: 'pointer',
-    transition: 'transform 0.3s',
   },
-  welcomeContainer: {
+  admissionsText: {
     textAlign: 'center',
-    color: '#003366',
   },
   welcomeText: {
-    fontSize: '1.5rem',
+    fontSize: '2rem',
     color: '#003366',
-    textTransform: 'uppercase',
-    fontWeight: 'bold',
+    marginBottom: '20px',
+  },
+  applyButton: {
+    marginTop: '20px',
+    padding: '10px 20px',
+    backgroundColor: '#D4AF37',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '5px',
+    fontSize: '1rem',
+    cursor: 'pointer',
   },
   logoutButton: {
     marginTop: '20px',
-    padding: '12px 25px',
+    padding: '10px 20px',
     backgroundColor: '#e74c3c',
     color: '#fff',
     border: 'none',
     borderRadius: '5px',
-    cursor: 'pointer',
     fontSize: '1rem',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.2)',
+    cursor: 'pointer',
   },
 };
 
