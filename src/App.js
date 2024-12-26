@@ -49,7 +49,7 @@ function App() {
 
           {/* Dashboard - Protected Route */}
           <Route
-            path="/dashboard"
+            path="/Dashboard"
             element={
               <ProtectedRoute isAuthenticated={isAuthenticated}>
                 <Dashboard />
