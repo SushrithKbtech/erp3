@@ -54,15 +54,7 @@ function App() {
           </div>
         </div>
         <div style={styles.rightSection}>
-          <div style={styles.overlay}>
-            <img src={rvuLogo} alt="RV University Logo" style={styles.logo} />
-            <div style={styles.admissionsText}>
-              <h2 style={styles.subtitle}>New-Age Global University for Liberal Education</h2>
-              <h1 style={styles.title}>ADMISSIONS OPEN 2025</h1>
-              <p style={styles.description}>For all programmes</p>
-              <button style={styles.applyButton}>Apply Now</button>
-            </div>
-          </div>
+          <div style={styles.fadingEffect}></div>
         </div>
       </div>
     </GoogleOAuthProvider>
@@ -78,7 +70,7 @@ const styles = {
     backgroundPosition: 'center',
   },
   leftSection: {
-    flex: 1.5,
+    flex: 1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -93,47 +85,21 @@ const styles = {
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
   },
   rightSection: {
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 2,
     position: 'relative',
     overflow: 'hidden',
   },
-  overlay: {
-    textAlign: 'center',
-    color: '#fff',
-    padding: '20px',
+  fadingEffect: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: '50%',
+    background: 'linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5))',
   },
   logo: {
     width: '120px',
     marginBottom: '20px',
-  },
-  admissionsText: {
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: '1.2rem',
-    marginBottom: '10px',
-  },
-  title: {
-    fontSize: '2.5rem',
-    fontWeight: 'bold',
-    marginBottom: '10px',
-  },
-  description: {
-    fontSize: '1rem',
-    marginBottom: '20px',
-  },
-  applyButton: {
-    marginTop: '10px',
-    padding: '10px 20px',
-    backgroundColor: '#D4AF37',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '5px',
-    fontSize: '1rem',
-    cursor: 'pointer',
   },
   welcomeText: {
     fontSize: '1.5rem',
