@@ -1,15 +1,8 @@
 import React, { useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import "./App.css"; // For login
-import "./upstyle.css"; // For dashboard
-
+import "./App.css";
+import "./upstyle.css";
 // Simulated Authentication
 let isAuthenticated = false; // Replace with actual authentication logic
 
@@ -33,15 +26,35 @@ const Login = () => {
 
   return (
     <GoogleOAuthProvider clientId={clientId}>
-      <div className="login-container">
+      <div
+        style={{
+          height: "100vh",
+          backgroundColor: "#000000",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          color: "#FFFFFF",
+          fontFamily: '"Poppins", sans-serif',
+          flexDirection: "column",
+        }}
+      >
         <img
-          src="https://rvu.edu.in/wp-content/themes/rvu/images/rvu-logo.png"
+          src="rvu-logo.png"
           alt="RV University Logo"
-          className="login-logo"
+          style={{
+            width: "250px",
+            height: "150px",
+            marginBottom: "20px",
+          }}
         />
-        <header>
-          <h1>Welcome to RV University Portal</h1>
-          <p>Please log in with your Google account to continue.</p>
+        <header style={{ marginBottom: "20px" }}>
+          <h1 style={{ fontSize: "3rem", fontWeight: "bold", margin: "0px", color: "#FFD700" }}>
+            Welcome to RV University Portal
+          </h1>
+          <p style={{ fontSize: "1.5rem", margin: "10px 0px", fontWeight: 100 }}>
+            Please log in with your Google account to continue.
+          </p>
         </header>
         <GoogleLogin
           onSuccess={handleGoogleSuccess}
@@ -49,6 +62,15 @@ const Login = () => {
           theme="outline"
           shape="pill"
           text="Login with Google"
+          style={{
+            fontSize: "1rem",
+            padding: "10px 20px",
+            borderRadius: "5px",
+            backgroundColor: "#f1c40f",
+            color: "#000",
+            fontWeight: "bold",
+            border: "none",
+          }}
         />
       </div>
     </GoogleOAuthProvider>
@@ -69,13 +91,14 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="dashboard-container">
+    <div>
       <header className="header">
         <nav className="nav">
           <img
             src="/static/images/logo.png"
             alt="RV University Logo"
             className="nav__logo"
+            style={{ height: "5rem" }}
           />
           <ul className="nav__links">
             <li className="nav__item">
@@ -85,7 +108,7 @@ const Dashboard = () => {
             </li>
             <li className="nav__item">
               <a className="nav__link" href="/view_files">
-                View Uploads
+                View uploads
               </a>
             </li>
             <li className="nav__item">
@@ -98,7 +121,8 @@ const Dashboard = () => {
                 className="nav__link nav__link--profile"
                 href="/"
                 onClick={() => {
-                  isAuthenticated = false; // Clear authentication
+                  // Clear user session (if needed)
+                  isAuthenticated = false;
                 }}
               >
                 Logout
@@ -107,29 +131,38 @@ const Dashboard = () => {
           </ul>
         </nav>
 
-        <div className="header__title">
-          <h1>Where Knowledge Meets Opportunity</h1>
-          <h4>A transformative data collection tool for a smoother experience.</h4>
+        <div
+          className="header__title"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "2rem",
+            position: "relative",
+          }}
+        >
+          <h1>Welcome to Your Dashboard</h1>
         </div>
       </header>
 
+      {/* Add your dashboard sections here */}
       <main>
-        <section className="section">
+        <section className="section" id="section--1">
           <div className="section__title">
             <h2 className="section__description">Features</h2>
             <h3 className="section__header">Explore our advanced functionalities</h3>
           </div>
           <div className="features">
             <div className="features__feature">
-              <h5>Club Chat</h5>
+              <h4>Club Chat</h4>
               <p>Connect and collaborate with your peers.</p>
             </div>
             <div className="features__feature">
-              <h5>Upload Portfolio</h5>
+              <h4>Upload Portfolio</h4>
               <p>Showcase your achievements in a professional format.</p>
             </div>
             <div className="features__feature">
-              <h5>View Uploads</h5>
+              <h4>View Uploads</h4>
               <p>Access and manage your uploaded files seamlessly.</p>
             </div>
           </div>
