@@ -1,6 +1,6 @@
 import React from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import './styles.css';
+
 
 const App = () => {
   const handleGoogleSuccess = (response) => {
