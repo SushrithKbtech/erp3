@@ -1,7 +1,6 @@
 import React from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
-
 const App = () => {
   const handleGoogleSuccess = (response) => {
     console.log('Login Success:', response);
@@ -21,57 +20,46 @@ const App = () => {
           justifyContent: 'center',
           alignItems: 'center',
           height: '100vh',
-          backgroundColor: '#000000', // Fully dark black background
+          backgroundColor: '#0d0d0d', // Darker black background
         }}
       >
         <div
           className="form-container"
           style={{
-            width: '280px', // Smaller width
-            padding: '15px',
-            backgroundColor: '#121212', // Darker shade for the container
-            borderRadius: '8px',
-            boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.5)',
+            width: '300px', // Smaller width for the container
+            padding: '20px',
+            backgroundColor: '#1a1a1a', // Slightly lighter black than the background
+            borderRadius: '10px',
+            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
           }}
         >
           <a href="https://rvu.edu.in" target="_blank" rel="noopener noreferrer">
             <img
-              src="https://rvu.edu.in/wp-content/themes/rvu/images/footer_logo.svg" // Update path as necessary
+              src="/static/images/logo.png" // Update path as necessary
               alt="RV University Logo"
               className="logo"
               style={{
                 display: 'block',
                 margin: '0 auto',
-                marginBottom: '50px',
-                width: '150px',
-                height: '100px',
-                filter: 'brightness(0) saturate(100%) invert(80%) sepia(76%) saturate(700%) hue-rotate(356deg) brightness(90%) contrast(90%)', // Golden color
+                marginBottom: '20px',
+                width: '120px',
+                filter: 'brightness(0) saturate(100%) invert(77%) sepia(73%) saturate(368%) hue-rotate(356deg) brightness(95%) contrast(85%)', // Golden color
               }}
             />
           </a>
 
           {/* Login Section */}
           <div id="loginSection" className="login-section">
-            <div className="button-group" style={{ textAlign: 'center' }}>
-              <button
-                className="google-login-btn"
-                style={{
-                  width: '100%',
-                  backgroundColor: '#f1c40f', // Golden color
-                  color: '#000000',
-                  fontWeight: 'bold',
-                  padding: '12px',
-                  border: 'none',
-                  borderRadius: '5px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                onClick={() => console.log('Google Login Triggered')}
-              >
-                Login with Google&nbsp;→
-              </button>
+            <div className="button-group" style={{ marginBottom: '20px', textAlign: 'center' }}>
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleFailure}
+                useOneTap
+                text="Login with Google"
+                width="100%"
+                theme="outline"
+                shape="pill"
+              />
             </div>
           </div>
         </div>
