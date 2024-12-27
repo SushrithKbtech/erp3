@@ -1,16 +1,20 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
-const clientId = "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com"; // Replace with your actual client ID
+// Simulated Authentication State
+let isAuthenticated = false; // This will simulate the user's authentication status
+
+const clientId = "YOUR_CLIENT_ID"; // Replace with your Google OAuth client ID
 
 // Login Component
 const Login = () => {
   const navigate = useNavigate();
 
   const handleGoogleSuccess = (response) => {
-    const user = JSON.parse(atob(response.credential.split(".")[1])); // Decode JWT token
+    const user = JSON.parse(atob(response.credential.split(".")[1])); // Decode the JWT token
     console.log('Login Success:', user); // Debugging purpose
+    isAuthenticated = true; // Update the simulated authentication state
     navigate('/dashboard'); // Redirect to Dashboard after successful login
   };
 
@@ -91,13 +95,24 @@ const Dashboard = () => {
   );
 };
 
+// Protected Route Component
+const ProtectedRoute = ({ element }) => {
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+  return element;
+};
+
 // App Component with Routing
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={<ProtectedRoute element={<Dashboard />} />}
+        />
       </Routes>
     </Router>
   );
