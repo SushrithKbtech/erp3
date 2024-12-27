@@ -10,11 +10,12 @@ const App = () => {
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        color: '#FFFFFF', // White text colors
+        color: '#FFFFFF', // White text color
+        fontFamily: '"Poppins", sans-serif', // Stylish and professional font
       }}
     >
       <header style={{ marginBottom: '20px' }}>
-        <h1 style={{ fontSize: '3rem', margin: '0px' }}>
+        <h1 style={{ fontSize: '3rem', fontWeight: 'bold', margin: '0px', color: '#B8860B' }}>
           Welcome to RV University
         </h1>
         <p style={{ fontSize: '1.5rem', margin: '10px 0px', fontWeight: 'lighter' }}>
