@@ -42,7 +42,7 @@ const App = () => {
               style={{
                 display: 'block',
                 margin: '0 auto',
-                marginBottom: '10px',
+                marginBottom: '50px',
                 width: '100px',
                 filter: 'brightness(0) saturate(100%) invert(80%) sepia(76%) saturate(700%) hue-rotate(356deg) brightness(90%) contrast(90%)', // Golden color
               }}
