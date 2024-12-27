@@ -21,17 +21,17 @@ const App = () => {
           justifyContent: 'center',
           alignItems: 'center',
           height: '100vh',
-          backgroundColor: '#000000', // Full dark black background
+          backgroundColor: '#0d0d0d', // Darker black background
         }}
       >
         <div
           className="form-container"
           style={{
-            width: '350px',
+            width: '300px', // Smaller width for the container
             padding: '20px',
             backgroundColor: '#1a1a1a', // Slightly lighter black than the background
             borderRadius: '10px',
-            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
           }}
         >
           <a href="https://rvu.edu.in" target="_blank" rel="noopener noreferrer">
@@ -43,7 +43,7 @@ const App = () => {
                 display: 'block',
                 margin: '0 auto',
                 marginBottom: '20px',
-                width: '100px',
+                width: '120px',
                 filter: 'brightness(0) saturate(100%) invert(77%) sepia(73%) saturate(368%) hue-rotate(356deg) brightness(95%) contrast(85%)', // Golden color
               }}
             />
