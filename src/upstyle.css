@@ -998,3 +998,70 @@ h4 {
       transform: rotate(360deg);
   }
 }
+/* Profile Picture Styling */
+.profile-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid gold; /* Gold border */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-picture:hover {
+  transform: scale(1.1); /* Slight zoom effect on hover */
+  box-shadow: 0 0 10px gold; /* Glow effect */
+}
+
+/* Profile Hover Box Styling */
+.profile-hover {
+  position: absolute;
+  top: 60px; /* Adjust to position below the profile picture */
+  right: 0;
+  background-color: #1a1a1a; /* Dark background */
+  color: #fff; /* White text */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for the box */
+  padding: 10px 20px;
+  width: 350px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.profile-hover p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.profile-hover button {
+  display: block;
+  margin: 10px auto 0;
+  background-color: #f1c40f; /* Golden color for the button */
+  color: #000; /* Black text */
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.profile-hover button:hover {
+  background-color: #ffb700; /* Darker golden color */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Show the hover box on profile picture hover */
+.profile-container:hover .profile-hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
