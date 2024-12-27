@@ -10,7 +10,7 @@ const App = () => {
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        color: '#FFFFFF', // White text color
+        color: '#FFFFFF', // White text colors
       }}
     >
       <header style={{ marginBottom: '20px' }}>
