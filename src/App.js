@@ -4,7 +4,7 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import "./App.css"; // For login styling
 import "./upstyle.css"; // For dashboard and other page styling
 
-const clientId = "YOUR_CLIENT_ID"; // Replace with your Google OAuth client ID
+const clientId = "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com"; // Replace with your Google OAuth client ID
 
 // Simulated Authentication State
 let isAuthenticated = false;
