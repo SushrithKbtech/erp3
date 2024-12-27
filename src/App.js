@@ -95,7 +95,7 @@ const Dashboard = () => {
       <header className="header">
         <nav className="nav">
           <img
-            src="https://rvu.edu.in/wp-content/themes/rvu/images/footer_logo.svg"
+            src="https://rvu.edu.in/wp-content/themes/rvu/images/rvu-logo.png"
             alt="RV University Logo"
             className="nav__logo"
             style={{ height: "5rem" }}
