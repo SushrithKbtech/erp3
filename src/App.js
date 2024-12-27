@@ -7,7 +7,7 @@ import "./upstyle.css"; // For Dashboard styling
 // Simulated Authentication
 let isAuthenticated = false;
 
-const clientId = "YOUR_CLIENT_ID"; // Replace with your Google OAuth client ID
+const clientId = "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com"; // Replace with your Google OAuth client ID
 
 // Login Component
 const Login = () => {
