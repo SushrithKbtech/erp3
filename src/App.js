@@ -1,20 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
-const clientId = "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com"; // Replace with your Google OAuth client ID
+// Google OAuth Client ID
+const clientId =
+  "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com";
 
-// Authentication State
-let isAuthenticated = false;
+// Simulated Authentication State Management
+const useAuth = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    Boolean(localStorage.getItem("isAuthenticated")) // Check from localStorage
+  );
+
+  const login = () => {
+    setIsAuthenticated(true);
+    localStorage.setItem("isAuthenticated", "true");
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem("isAuthenticated");
+  };
+
+  return { isAuthenticated, login, logout };
+};
 
 // Login Component
 const Login = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleGoogleSuccess = (response) => {
-    const user = JSON.parse(atob(response.credential.split(".")[1])); // Decode the JWT token
-    console.log("Login Success:", user); // Debugging purpose
-    isAuthenticated = true; // Update authentication state
+    const user = JSON.parse(atob(response.credential.split(".")[1])); // Decode JWT token
+    console.log("Login Success:", user);
+    login(); // Update authentication state
     navigate("/dashboard"); // Redirect to Dashboard
   };
 
@@ -78,13 +103,8 @@ const Login = () => {
 
 // Dashboard Component
 const Dashboard = () => {
+  const { logout } = useAuth();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/"); // Redirect to login if not authenticated
-    }
-  }, [navigate]);
 
   return (
     <div>
@@ -117,7 +137,7 @@ const Dashboard = () => {
                 className="nav__link nav__link--profile"
                 href="/"
                 onClick={() => {
-                  isAuthenticated = false; // Clear user session
+                  logout(); // Clear user session
                   navigate("/");
                 }}
               >
@@ -142,14 +162,11 @@ const Dashboard = () => {
       </header>
 
       <main>
-        <section className="section" id="section--1">
+        <section className="section">
           <div className="section__title">
             <h2 className="section__description">Dashboard Overview</h2>
             <h3 className="section__header">Track your progress and activity</h3>
           </div>
-        </section>
-
-        <section>
           <p>Welcome to the dashboard! Here you can manage your activities.</p>
         </section>
       </main>
@@ -159,11 +176,15 @@ const Dashboard = () => {
 
 // Protected Route Component
 const ProtectedRoute = ({ element }) => {
+  const { isAuthenticated } = useAuth();
+
   return isAuthenticated ? element : <Navigate to="/" replace />;
 };
 
 // App Component with Routing
 const App = () => {
+  const auth = useAuth();
+
   return (
     <Router>
       <Routes>
@@ -171,6 +192,14 @@ const App = () => {
         <Route
           path="/dashboard"
           element={<ProtectedRoute element={<Dashboard />} />}
+        />
+        <Route
+          path="/clubchat"
+          element={<ProtectedRoute element={<h1>Club Chat</h1>} />} // Example Club Chat
+        />
+        <Route
+          path="/view_files"
+          element={<ProtectedRoute element={<h1>View Files</h1>} />} // Example View Files
         />
       </Routes>
     </Router>
