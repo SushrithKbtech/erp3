@@ -40,7 +40,7 @@ const Login = () => {
         }}
       >
         <img
-          src="rvu-logo.png"
+          src="https://rvu.edu.in/wp-content/themes/rvu/images/footer_logo.svg"
           alt="RV University Logo"
           style={{
             width: "250px",
@@ -95,7 +95,7 @@ const Dashboard = () => {
       <header className="header">
         <nav className="nav">
           <img
-            src="/static/images/logo.png"
+            src="https://rvu.edu.in/wp-content/themes/rvu/images/footer_logo.svg"
             alt="RV University Logo"
             className="nav__logo"
             style={{ height: "5rem" }}
