@@ -27,17 +27,16 @@ const App = () => {
         }}
       >
         <img
-          src="./src/rvu-logo.png" // Update with the correct path
+          src="rvu-logo.png" // Update with the correct path
           alt="RV University Logo"
           style={{
             width: '250px',
             height: '150px',
             marginBottom: '20px',
-            filter: 'brightness(0) saturate(100%) invert(80%) sepia(76%) saturate(700%) hue-rotate(356deg) brightness(90%) contrast(90%)',
           }}
         />
         <header style={{ marginBottom: '20px' }}>
-          <h1 style={{ fontSize: '3rem', fontWeight: 'bold', margin: '0px', color: '#B8860B' }}>
+          <h1 style={{ fontSize: '3rem', fontWeight: 'bold', margin: '0px', color: '#FFD700' }}>
             Welcome to RV University Portal
           </h1>
           <p style={{ fontSize: '1.5rem', margin: '10px 0px', fontWeight: 100 }}>
