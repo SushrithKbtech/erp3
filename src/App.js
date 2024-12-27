@@ -27,7 +27,7 @@ const App = () => {
         }}
       >
         <img
-          src="/path-to-logo/logo.png" // Update with the correct path
+          src="https://rvu.edu.in/wp-content/themes/rvu/images/footer_logo.svg" // Update with the correct path
           alt="RV University Logo"
           style={{
             width: '250px',
