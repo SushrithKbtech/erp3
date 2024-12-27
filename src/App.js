@@ -8,7 +8,7 @@ import "./App.css";
 import "./upstyle.css";
 
 const clientId = "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com"; // Replace with your Google OAuth client ID
-const apiKey = "AIzaSyDirHxXT360WyZYajUxGxgLe3S2TNwteJg"; // Replace with your Google API Key
+const apiKey = "AIzaSyDirHxXT360WyZYajUxGxgLe3S2TNwteJg"; // Replace with your GoogleAPI Key
 
 // Configuration for multiple sheets
 const subjectSheets = [
