@@ -30,6 +30,44 @@
   padding: 0;
   box-sizing: inherit;
 }
+.dashboard-container {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+}
+
+.header {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #444;
+}
+
+.header__title {
+  text-align: center;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.features__feature {
+  background-color: #333;
+  border-radius: 10px;
+  padding: 20px;
+  width: 25%;
+  text-align: center;
+}
+
+.features__feature h5 {
+  color: #ffd700;
+}
+
+.features__feature p {
+  color: #bbb;
+}
 
 html {
   font-size: 62.5%;
