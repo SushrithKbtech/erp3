@@ -1,33 +1,41 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
-const App = () => {
+const clientId = "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com"; // Replace with your actual client ID
+
+// Login Component
+const Login = () => {
+  const navigate = useNavigate();
+
   const handleGoogleSuccess = (response) => {
-    console.log('Login Success:', response);
-    // Handle user data and token here
+    const user = JSON.parse(atob(response.credential.split(".")[1])); // Decode JWT token
+    console.log('Login Success:', user); // Debugging purpose
+    navigate('/dashboard'); // Redirect to Dashboard after successful login
   };
 
   const handleGoogleFailure = (error) => {
     console.error('Login Failed:', error);
+    alert('Login failed. Please try again.');
   };
 
   return (
-    <GoogleOAuthProvider clientId="YOUR_CLIENT_ID">
+    <GoogleOAuthProvider clientId={clientId}>
       <div
         style={{
           height: '100vh',
-          backgroundColor: '#000000', // Fully dark black background
+          backgroundColor: '#000000',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           textAlign: 'center',
-          color: '#FFFFFF', // White text color
-          fontFamily: '"Poppins", sans-serif', // Stylish and professional font
+          color: '#FFFFFF',
+          fontFamily: '"Poppins", sans-serif',
           flexDirection: 'column',
         }}
       >
         <img
-          src="rvu-logo.png" // Update with the correct path
+          src="rvu-logo.png"
           alt="RV University Logo"
           style={{
             width: '250px',
@@ -53,7 +61,7 @@ const App = () => {
             fontSize: '1rem',
             padding: '10px 20px',
             borderRadius: '5px',
-            backgroundColor: '#f1c40f', // Golden color
+            backgroundColor: '#f1c40f',
             color: '#000',
             fontWeight: 'bold',
             border: 'none',
@@ -61,6 +69,37 @@ const App = () => {
         />
       </div>
     </GoogleOAuthProvider>
+  );
+};
+
+// Dashboard Component
+const Dashboard = () => {
+  return (
+    <div
+      style={{
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#f1f1f1',
+        color: '#333',
+        fontFamily: '"Poppins", sans-serif',
+      }}
+    >
+      <h1>Welcome to the Dashboard!</h1>
+    </div>
+  );
+};
+
+// App Component with Routing
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 };
 
