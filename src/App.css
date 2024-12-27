@@ -49,7 +49,7 @@ header h1 {
   font-size: 3rem;
   font-weight: bold;
   margin: 0;
-  color: #C99700;
+  color: #ffd700;
 }
 
 header p {
@@ -57,7 +57,27 @@ header p {
   margin: 10px 0;
   font-weight: 100;
 }
+.nav__link--profile-container {
+  position: relative;
+}
 
+.profile-box {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  z-index: 100;
+  white-space: nowrap;
+}
+
+.nav__link--profile-container:hover .profile-box {
+  display: block;
+}
 button {
   font-size: 1rem;
   padding: 10px 20px;
