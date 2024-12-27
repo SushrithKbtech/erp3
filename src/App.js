@@ -1,46 +1,26 @@
-import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import "./upstyle.css"; // Include the provided CSS file here
 
-// Google OAuth Client ID
 const clientId =
-  "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com";
+  "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com"; // Replace with your client ID
 
-// Simulated Authentication State Management
 const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    Boolean(localStorage.getItem("isAuthenticated")) // Check from localStorage
-  );
-
-  const login = () => {
-    setIsAuthenticated(true);
-    localStorage.setItem("isAuthenticated", "true");
-  };
-
-  const logout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem("isAuthenticated");
-  };
-
+  const isAuthenticated = Boolean(localStorage.getItem("isAuthenticated"));
+  const login = () => localStorage.setItem("isAuthenticated", "true");
+  const logout = () => localStorage.removeItem("isAuthenticated");
   return { isAuthenticated, login, logout };
 };
 
-// Login Component
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleGoogleSuccess = (response) => {
-    const user = JSON.parse(atob(response.credential.split(".")[1])); // Decode JWT token
-    console.log("Login Success:", user);
-    login(); // Update authentication state
-    navigate("/dashboard"); // Redirect to Dashboard
+    console.log("Login Success:", response);
+    login();
+    navigate("/dashboard");
   };
 
   const handleGoogleFailure = (error) => {
@@ -50,61 +30,36 @@ const Login = () => {
 
   return (
     <GoogleOAuthProvider clientId={clientId}>
-      <div
-        style={{
-          height: "100vh",
-          backgroundColor: "#000000",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-          color: "#FFFFFF",
-          fontFamily: '"Poppins", sans-serif',
-          flexDirection: "column",
-        }}
-      >
-        <img
-          src="rvu-logo.png"
-          alt="RV University Logo"
-          style={{
-            width: "250px",
-            height: "150px",
-            marginBottom: "20px",
-          }}
-        />
-        <header style={{ marginBottom: "20px" }}>
-          <h1 style={{ fontSize: "3rem", fontWeight: "bold", margin: "0px", color: "#FFD700" }}>
-            Welcome to RV University Portal
-          </h1>
-          <p style={{ fontSize: "1.5rem", margin: "10px 0px", fontWeight: 100 }}>
-            Please log in with your Google account to continue.
-          </p>
-        </header>
-        <GoogleLogin
-          onSuccess={handleGoogleSuccess}
-          onError={handleGoogleFailure}
-          theme="outline"
-          shape="pill"
-          text="Login with Google"
-          style={{
-            fontSize: "1rem",
-            padding: "10px 20px",
-            borderRadius: "5px",
-            backgroundColor: "#f1c40f",
-            color: "#000",
-            fontWeight: "bold",
-            border: "none",
-          }}
-        />
+      <div className="login-container">
+        <div className="login-box">
+          <img
+            src="rvu-logo.png"
+            alt="RV University Logo"
+            className="login-logo"
+          />
+          <h1 className="login-header">Welcome to RV University Portal</h1>
+          <p className="login-subtext">Log in with your Google account to continue.</p>
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleFailure}
+            theme="outline"
+            shape="pill"
+          />
+        </div>
       </div>
     </GoogleOAuthProvider>
   );
 };
 
-// Dashboard Component
 const Dashboard = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("isAuthenticated")) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   return (
     <div>
@@ -114,30 +69,23 @@ const Dashboard = () => {
             src="/static/images/logo.png"
             alt="RV University Logo"
             className="nav__logo"
-            style={{ height: "5rem" }}
           />
           <ul className="nav__links">
             <li className="nav__item">
-              <a className="nav__link" href="/clubchat">
-                Club Chat
-              </a>
+              <a className="nav__link" href="/clubchat">Club Chat</a>
             </li>
             <li className="nav__item">
-              <a className="nav__link" href="/view_files">
-                View uploads
-              </a>
+              <a className="nav__link" href="/view_files">View Uploads</a>
             </li>
             <li className="nav__item">
-              <a className="nav__link" href="/upload">
-                Upload Portfolio
-              </a>
+              <a className="nav__link" href="/upload">Upload Portfolio</a>
             </li>
             <li className="nav__item">
               <a
                 className="nav__link nav__link--profile"
                 href="/"
                 onClick={() => {
-                  logout(); // Clear user session
+                  logout();
                   navigate("/");
                 }}
               >
@@ -147,16 +95,7 @@ const Dashboard = () => {
           </ul>
         </nav>
 
-        <div
-          className="header__title"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "2rem",
-            position: "relative",
-          }}
-        >
+        <div className="header__title">
           <h1>Welcome to Your Dashboard</h1>
         </div>
       </header>
@@ -165,26 +104,37 @@ const Dashboard = () => {
         <section className="section">
           <div className="section__title">
             <h2 className="section__description">Dashboard Overview</h2>
-            <h3 className="section__header">Track your progress and activity</h3>
+            <h3 className="section__header">Manage your activities here</h3>
           </div>
-          <p>Welcome to the dashboard! Here you can manage your activities.</p>
+          <div className="features">
+            <div className="features__feature">
+              <h5 className="features__header">Club Chat</h5>
+              <p>Engage with your clubs and fellow members.</p>
+              <a href="/clubchat" className="btn">Go to Club Chat</a>
+            </div>
+            <div className="features__feature">
+              <h5 className="features__header">View Uploads</h5>
+              <p>Access all your uploaded documents and projects.</p>
+              <a href="/view_files" className="btn">View Files</a>
+            </div>
+            <div className="features__feature">
+              <h5 className="features__header">Upload Portfolio</h5>
+              <p>Submit your work and portfolio for review.</p>
+              <a href="/upload" className="btn">Upload Now</a>
+            </div>
+          </div>
         </section>
       </main>
     </div>
   );
 };
 
-// Protected Route Component
 const ProtectedRoute = ({ element }) => {
   const { isAuthenticated } = useAuth();
-
   return isAuthenticated ? element : <Navigate to="/" replace />;
 };
 
-// App Component with Routing
 const App = () => {
-  const auth = useAuth();
-
   return (
     <Router>
       <Routes>
@@ -195,11 +145,15 @@ const App = () => {
         />
         <Route
           path="/clubchat"
-          element={<ProtectedRoute element={<h1>Club Chat</h1>} />} // Example Club Chat
+          element={<ProtectedRoute element={<h1>Club Chat</h1>} />}
         />
         <Route
           path="/view_files"
-          element={<ProtectedRoute element={<h1>View Files</h1>} />} // Example View Files
+          element={<ProtectedRoute element={<h1>View Files</h1>} />}
+        />
+        <Route
+          path="/upload"
+          element={<ProtectedRoute element={<h1>Upload Portfolio</h1>} />}
         />
       </Routes>
     </Router>
