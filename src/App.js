@@ -36,7 +36,7 @@ const App = () => {
         >
           <a href="https://rvu.edu.in" target="_blank" rel="noopener noreferrer">
             <img
-              src="rvu-logo.png" // Update path as necessary
+              src="https://rvu.edu.in/wp-content/themes/rvu/images/footer_logo.svg" // Update path as necessary
               alt="RV University Logo"
               className="logo"
               style={{
