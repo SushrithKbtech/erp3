@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import "./App.css"; // For login styling
-import "./upstyle.css"; // For dashboard and other page styling
+import "./App.css"; // For Login styling
+import "./upstyle.css"; // For Dashboard styling
 
-const clientId = "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com"; // Replace with your Google OAuth client ID
-
-// Simulated Authentication State
+// Simulated Authentication
 let isAuthenticated = false;
+
+const clientId = "YOUR_CLIENT_ID"; // Replace with your Google OAuth client ID
 
 // Login Component
 const Login = () => {
   const navigate = useNavigate();
 
   const handleGoogleSuccess = (response) => {
-    const user = JSON.parse(atob(response.credential.split(".")[1])); // Decode the JWT token
-    console.log("Login Success:", user); // Debugging purpose
-    isAuthenticated = true; // Update the simulated authentication state
-    localStorage.setItem("isAuthenticated", true); // Save authentication status
-    navigate("/dashboard"); // Redirect to Dashboard after successful login
+    const user = JSON.parse(atob(response.credential.split(".")[1]));
+    console.log("Login Success:", user);
+    isAuthenticated = true; // Mark as authenticated
+    localStorage.setItem("isAuthenticated", true); // Store auth status
+    navigate("/dashboard"); // Redirect to the dashboard
   };
 
   const handleGoogleFailure = (error) => {
@@ -28,22 +28,52 @@ const Login = () => {
 
   return (
     <GoogleOAuthProvider clientId={clientId}>
-      <div className="login-container">
-        <div className="login-box">
-          <img
-            src="/rvu-logo.png"
-            alt="RV University Logo"
-            className="logo"
-          />
-          <h1>Welcome to RV University Portal</h1>
-          <p>Log in with your Google account to continue.</p>
-          <GoogleLogin
-            onSuccess={handleGoogleSuccess}
-            onError={handleGoogleFailure}
-            theme="outline"
-            shape="pill"
-          />
-        </div>
+      <div
+        style={{
+          height: "100vh",
+          backgroundColor: "#000000",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          color: "#FFFFFF",
+          fontFamily: '"Poppins", sans-serif',
+          flexDirection: "column",
+        }}
+      >
+        <img
+          src="rvu-logo.png"
+          alt="RV University Logo"
+          style={{
+            width: "250px",
+            height: "150px",
+            marginBottom: "20px",
+          }}
+        />
+        <header style={{ marginBottom: "20px" }}>
+          <h1 style={{ fontSize: "3rem", fontWeight: "bold", margin: "0px", color: "#FFD700" }}>
+            Welcome to RV University Portal
+          </h1>
+          <p style={{ fontSize: "1.5rem", margin: "10px 0px", fontWeight: 100 }}>
+            Please log in with your Google account to continue.
+          </p>
+        </header>
+        <GoogleLogin
+          onSuccess={handleGoogleSuccess}
+          onError={handleGoogleFailure}
+          theme="outline"
+          shape="pill"
+          text="Login with Google"
+          style={{
+            fontSize: "1rem",
+            padding: "10px 20px",
+            borderRadius: "5px",
+            backgroundColor: "#f1c40f",
+            color: "#000",
+            fontWeight: "bold",
+            border: "none",
+          }}
+        />
       </div>
     </GoogleOAuthProvider>
   );
@@ -53,7 +83,6 @@ const Login = () => {
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  // Redirect to login if the user is not authenticated
   useEffect(() => {
     const authStatus = localStorage.getItem("isAuthenticated");
     if (!authStatus) {
@@ -73,7 +102,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="dashboard-container">
+    <div>
       <header className="header">
         <nav className="nav">
           <img
@@ -105,9 +134,35 @@ const Dashboard = () => {
           </ul>
         </nav>
         <div className="header__title">
-          <h1>Welcome to Your Dashboard</h1>
+          <h1>
+            <span className="highlight">Where knowledge meets opportunity</span>
+          </h1>
+          <p>A transformative data collection tool for a smoother experience.</p>
         </div>
       </header>
+
+      <main>
+        <section className="section" id="section--1">
+          <div className="section__title">
+            <h2 className="section__description">Features</h2>
+            <h3 className="section__header">Explore our advanced functionalities</h3>
+          </div>
+        </section>
+        <section className="features">
+          <div className="features__feature">
+            <h3 className="features__header">Club Chat</h3>
+            <p>Connect and collaborate with your peers.</p>
+          </div>
+          <div className="features__feature">
+            <h3 className="features__header">View Uploads</h3>
+            <p>Access and manage your uploaded files seamlessly.</p>
+          </div>
+          <div className="features__feature">
+            <h3 className="features__header">Upload Portfolio</h3>
+            <p>Showcase your achievements in a professional format.</p>
+          </div>
+        </section>
+      </main>
     </div>
   );
 };
