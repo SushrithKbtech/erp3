@@ -37,7 +37,7 @@ const App = () => {
           }}
         />
         <header style={{ marginBottom: '20px' }}>
-          <h1 style={{ fontSize: '3rem', fontWeight: 'bold', margin: '0px', color: '#B8860B' }}>
+          <h1 style={{ fontSize: '3rem', fontWeight: 'bold', margin: '0px', color: '#FFD700' }}>
             Welcome to RV University Portal
           </h1>
           <p style={{ fontSize: '1.5rem', margin: '10px 0px', fontWeight: 100 }}>
