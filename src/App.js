@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import "./app.css"; // CSS for Login
-import "./upstyle.css"; // CSS for Dashboard
+import "./App.css"; // For login
+import "./upstyle.css"; // For dashboard
 
 // Simulated Authentication
 let isAuthenticated = false; // Replace with actual authentication logic
 
-const clientId = "YOUR_CLIENT_ID"; // Replace with your Google OAuth client ID
+const clientId = "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com"; // Replace with your Google OAuth client ID
 
 // Login Component
 const Login = () => {
@@ -28,21 +34,22 @@ const Login = () => {
   return (
     <GoogleOAuthProvider clientId={clientId}>
       <div className="login-container">
-        <div className="login-box">
-          <img
-            src="rvu-logo.png"
-            alt="RV University Logo"
-            className="login-logo"
-          />
-          <h1 className="login-heading">Welcome to RV University Portal</h1>
-          <p className="login-subtext">Please log in with your Google account to continue.</p>
-          <GoogleLogin
-            onSuccess={handleGoogleSuccess}
-            onError={handleGoogleFailure}
-            theme="outline"
-            shape="pill"
-          />
-        </div>
+        <img
+          src="rvu-logo.png"
+          alt="RV University Logo"
+          className="login-logo"
+        />
+        <header>
+          <h1>Welcome to RV University Portal</h1>
+          <p>Please log in with your Google account to continue.</p>
+        </header>
+        <GoogleLogin
+          onSuccess={handleGoogleSuccess}
+          onError={handleGoogleFailure}
+          theme="outline"
+          shape="pill"
+          text="Login with Google"
+        />
       </div>
     </GoogleOAuthProvider>
   );
@@ -62,7 +69,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="dashboard">
+    <div className="dashboard-container">
       <header className="header">
         <nav className="nav">
           <img
@@ -72,16 +79,28 @@ const Dashboard = () => {
           />
           <ul className="nav__links">
             <li className="nav__item">
-              <a className="nav__link" href="/clubchat">Club Chat</a>
+              <a className="nav__link" href="/clubchat">
+                Club Chat
+              </a>
             </li>
             <li className="nav__item">
-              <a className="nav__link" href="/view_files">View Uploads</a>
+              <a className="nav__link" href="/view_files">
+                View Uploads
+              </a>
             </li>
             <li className="nav__item">
-              <a className="nav__link" href="/upload">Upload Portfolio</a>
+              <a className="nav__link" href="/upload">
+                Upload Portfolio
+              </a>
             </li>
             <li className="nav__item">
-              <a className="nav__link nav__link--profile" href="/">
+              <a
+                className="nav__link nav__link--profile"
+                href="/"
+                onClick={() => {
+                  isAuthenticated = false; // Clear authentication
+                }}
+              >
                 Logout
               </a>
             </li>
@@ -89,8 +108,8 @@ const Dashboard = () => {
         </nav>
 
         <div className="header__title">
-          <h1 className="dashboard-heading">Where <span className="highlight">knowledge</span> meets <span className="highlight">opportunity</span></h1>
-          <p className="dashboard-subheading">A transformative data collection tool for a smoother experience.</p>
+          <h1>Where Knowledge Meets Opportunity</h1>
+          <h4>A transformative data collection tool for a smoother experience.</h4>
         </div>
       </header>
 
@@ -102,15 +121,15 @@ const Dashboard = () => {
           </div>
           <div className="features">
             <div className="features__feature">
-              <h4>Club Chat</h4>
+              <h5>Club Chat</h5>
               <p>Connect and collaborate with your peers.</p>
             </div>
             <div className="features__feature">
-              <h4>Upload Portfolio</h4>
+              <h5>Upload Portfolio</h5>
               <p>Showcase your achievements in a professional format.</p>
             </div>
             <div className="features__feature">
-              <h4>View Uploads</h4>
+              <h5>View Uploads</h5>
               <p>Access and manage your uploaded files seamlessly.</p>
             </div>
           </div>
@@ -134,7 +153,10 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+        <Route
+          path="/dashboard"
+          element={<ProtectedRoute element={<Dashboard />} />}
+        />
       </Routes>
     </Router>
   );
