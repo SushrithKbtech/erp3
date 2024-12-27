@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-
-// Simulated Authentication State
-let isAuthenticated = false; // This will simulate the user's authentication status
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 const clientId = "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com"; // Replace with your Google OAuth client ID
+
+// Authentication State
+let isAuthenticated = false;
 
 // Login Component
 const Login = () => {
@@ -13,45 +13,45 @@ const Login = () => {
 
   const handleGoogleSuccess = (response) => {
     const user = JSON.parse(atob(response.credential.split(".")[1])); // Decode the JWT token
-    console.log('Login Success:', user); // Debugging purpose
-    isAuthenticated = true; // Update the simulated authentication state
-    navigate('/dashboard'); // Redirect to Dashboard after successful login
+    console.log("Login Success:", user); // Debugging purpose
+    isAuthenticated = true; // Update authentication state
+    navigate("/dashboard"); // Redirect to Dashboard
   };
 
   const handleGoogleFailure = (error) => {
-    console.error('Login Failed:', error);
-    alert('Login failed. Please try again.');
+    console.error("Login Failed:", error);
+    alert("Login failed. Please try again.");
   };
 
   return (
     <GoogleOAuthProvider clientId={clientId}>
       <div
         style={{
-          height: '100vh',
-          backgroundColor: '#000000',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          textAlign: 'center',
-          color: '#FFFFFF',
+          height: "100vh",
+          backgroundColor: "#000000",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          color: "#FFFFFF",
           fontFamily: '"Poppins", sans-serif',
-          flexDirection: 'column',
+          flexDirection: "column",
         }}
       >
         <img
           src="rvu-logo.png"
           alt="RV University Logo"
           style={{
-            width: '250px',
-            height: '150px',
-            marginBottom: '20px',
+            width: "250px",
+            height: "150px",
+            marginBottom: "20px",
           }}
         />
-        <header style={{ marginBottom: '20px' }}>
-          <h1 style={{ fontSize: '3rem', fontWeight: 'bold', margin: '0px', color: '#FFD700' }}>
+        <header style={{ marginBottom: "20px" }}>
+          <h1 style={{ fontSize: "3rem", fontWeight: "bold", margin: "0px", color: "#FFD700" }}>
             Welcome to RV University Portal
           </h1>
-          <p style={{ fontSize: '1.5rem', margin: '10px 0px', fontWeight: 100 }}>
+          <p style={{ fontSize: "1.5rem", margin: "10px 0px", fontWeight: 100 }}>
             Please log in with your Google account to continue.
           </p>
         </header>
@@ -62,13 +62,13 @@ const Login = () => {
           shape="pill"
           text="Login with Google"
           style={{
-            fontSize: '1rem',
-            padding: '10px 20px',
-            borderRadius: '5px',
-            backgroundColor: '#f1c40f',
-            color: '#000',
-            fontWeight: 'bold',
-            border: 'none',
+            fontSize: "1rem",
+            padding: "10px 20px",
+            borderRadius: "5px",
+            backgroundColor: "#f1c40f",
+            color: "#000",
+            fontWeight: "bold",
+            border: "none",
           }}
         />
       </div>
@@ -77,32 +77,14 @@ const Login = () => {
 };
 
 // Dashboard Component
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
-// Simulated Authentication (Replace this with actual logic)
-const isAuthenticated = true; // This should be dynamically managed
-
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  // Redirect to login if the user is not authenticated
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate("/"); // Redirect to login
+      navigate("/"); // Redirect to login if not authenticated
     }
   }, [navigate]);
-
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "./upscript.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
 
   return (
     <div>
@@ -135,7 +117,7 @@ const Dashboard = () => {
                 className="nav__link nav__link--profile"
                 href="/"
                 onClick={() => {
-                  // Clear user session (if needed)
+                  isAuthenticated = false; // Clear user session
                   navigate("/");
                 }}
               >
@@ -159,7 +141,6 @@ const Dashboard = () => {
         </div>
       </header>
 
-      {/* Main Dashboard Content */}
       <main>
         <section className="section" id="section--1">
           <div className="section__title">
@@ -168,7 +149,6 @@ const Dashboard = () => {
           </div>
         </section>
 
-        {/* Add more sections or components here */}
         <section>
           <p>Welcome to the dashboard! Here you can manage your activities.</p>
         </section>
@@ -177,14 +157,9 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
-
 // Protected Route Component
 const ProtectedRoute = ({ element }) => {
-  if (!isAuthenticated) {
-    return <Navigate to="/" replace />;
-  }
-  return element;
+  return isAuthenticated ? element : <Navigate to="/" replace />;
 };
 
 // App Component with Routing
