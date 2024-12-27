@@ -52,11 +52,10 @@ const App = () => {
           {/* Login Section */}
           <div id="loginSection" className="login-section">
             <div className="button-group" style={{ textAlign: 'center' }}>
-              <a
-                href="https://lh3.googleusercontent.com/a/ACg8ocJ4EfksKp8tGWx47rcIDE92nxBUZfv1hHAzYkwIsGtJ-F5RLA=s96-c"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="google-login-btn"
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleFailure}
+                text="Login with Google"
                 style={{
                   width: '100%',
                   backgroundColor: '#f1c40f', // Golden color
@@ -69,11 +68,8 @@ const App = () => {
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  textDecoration: 'none',
                 }}
-              >
-                Login with Google&nbsp;→
-              </a>
+              />
             </div>
           </div>
         </div>
