@@ -14,14 +14,38 @@ const App = () => {
 
   return (
     <GoogleOAuthProvider clientId="YOUR_CLIENT_ID">
-      <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#1a1a1a' }}>
-        <div className="form-container" style={{ width: '400px', padding: '20px', backgroundColor: '#fff', borderRadius: '10px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)' }}>
+      <div
+        className="container"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+          backgroundColor: '#000000', // Full dark black background
+        }}
+      >
+        <div
+          className="form-container"
+          style={{
+            width: '350px',
+            padding: '20px',
+            backgroundColor: '#1a1a1a', // Slightly lighter black than the background
+            borderRadius: '10px',
+            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+          }}
+        >
           <a href="https://rvu.edu.in" target="_blank" rel="noopener noreferrer">
             <img
               src="/static/images/logo.png" // Update path as necessary
               alt="RV University Logo"
               className="logo"
-              style={{ display: 'block', margin: '0 auto', marginBottom: '20px', width: '100px' }}
+              style={{
+                display: 'block',
+                margin: '0 auto',
+                marginBottom: '20px',
+                width: '100px',
+                filter: 'brightness(0) saturate(100%) invert(77%) sepia(73%) saturate(368%) hue-rotate(356deg) brightness(95%) contrast(85%)', // Golden color
+              }}
             />
           </a>
 
@@ -32,8 +56,16 @@ const App = () => {
                 onSuccess={handleGoogleSuccess}
                 onError={handleGoogleFailure}
                 text="Login with Google"
-                theme="outline"
-                size="large"
+                theme="filled_black"
+                style={{
+                  backgroundColor: '#f1c40f', // Golden color
+                  color: '#000',
+                  fontWeight: 'bold',
+                  padding: '10px 20px',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                }}
               />
             </div>
           </div>
