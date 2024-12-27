@@ -13,7 +13,7 @@ const App = () => {
   };
 
   return (
-    <GoogleOAuthProvider clientId="YOUR_CLIENT_ID">
+    <GoogleOAuthProvider clientId="413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com">
       <div
         className="container"
         style={{
