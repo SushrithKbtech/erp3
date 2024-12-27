@@ -14,7 +14,7 @@ const App = () => {
       }}
     >
       <header style={{ marginBottom: '20px' }}>
-        <h1 style={{ fontSize: '3rem', fontWeight: 'bold', margin: '0px' }}>
+        <h1 style={{ fontSize: '3rem', margin: '0px' }}>
           Welcome to RV University
         </h1>
         <p style={{ fontSize: '1.5rem', margin: '10px 0px', fontWeight: 'lighter' }}>
