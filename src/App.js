@@ -15,7 +15,7 @@ const subjectSheets = [
   { subject: "DBMS", sheetId: "1lGEetDCTBhP3xGLwaH_SNfsqTlG8XqodjsyDsg_ISxQ" },
   { subject: "OS", sheetId: "1Av0rHuf_csr6Nal8Ti8pTKOj8BE0z9YTjeqZGa4Aj9o" },
   { subject: "IEPD SP-1", sheetId: "1dDZeJDDg_AxDjiLwU1CMfZlsA32zxz_yI0r5Qz6uPx0" },
-  { subject: "IEPD CIE-1", sheetId: "1lGEetDCTBhP3xGLwaH_SNfsqTlG8XqodjsyDsg_ISxQ" },
+  { subject: "IEPD CIE-1", sheetId: "1dDZeJDDg_AxDjiLwU1CMfZlsA32zxz_yI0r5Qz6uPx0" },
   // Add more sheets here
 ];
 
