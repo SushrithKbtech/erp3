@@ -77,23 +77,107 @@ const Login = () => {
 };
 
 // Dashboard Component
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+// Simulated Authentication (Replace this with actual logic)
+const isAuthenticated = true; // This should be dynamically managed
+
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  // Redirect to login if the user is not authenticated
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/"); // Redirect to login
+    }
+  }, [navigate]);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "./upscript.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f1f1f1',
-        color: '#333',
-        fontFamily: '"Poppins", sans-serif',
-      }}
-    >
-      <h1>Welcome to the Dashboard!</h1>
+    <div>
+      <header className="header">
+        <nav className="nav">
+          <img
+            src="/static/images/logo.png"
+            alt="RV University Logo"
+            className="nav__logo"
+            style={{ height: "5rem" }}
+          />
+          <ul className="nav__links">
+            <li className="nav__item">
+              <a className="nav__link" href="/clubchat">
+                Club Chat
+              </a>
+            </li>
+            <li className="nav__item">
+              <a className="nav__link" href="/view_files">
+                View uploads
+              </a>
+            </li>
+            <li className="nav__item">
+              <a className="nav__link" href="/upload">
+                Upload Portfolio
+              </a>
+            </li>
+            <li className="nav__item">
+              <a
+                className="nav__link nav__link--profile"
+                href="/"
+                onClick={() => {
+                  // Clear user session (if needed)
+                  navigate("/");
+                }}
+              >
+                Logout
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div
+          className="header__title"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "2rem",
+            position: "relative",
+          }}
+        >
+          <h1>Welcome to Your Dashboard</h1>
+        </div>
+      </header>
+
+      {/* Main Dashboard Content */}
+      <main>
+        <section className="section" id="section--1">
+          <div className="section__title">
+            <h2 className="section__description">Dashboard Overview</h2>
+            <h3 className="section__header">Track your progress and activity</h3>
+          </div>
+        </section>
+
+        {/* Add more sections or components here */}
+        <section>
+          <p>Welcome to the dashboard! Here you can manage your activities.</p>
+        </section>
+      </main>
     </div>
   );
 };
+
+export default Dashboard;
 
 // Protected Route Component
 const ProtectedRoute = ({ element }) => {
