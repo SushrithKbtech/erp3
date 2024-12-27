@@ -35,7 +35,7 @@ const Login = () => {
     <GoogleOAuthProvider clientId={clientId}>
       <div className="login-container">
         <img
-          src="https://www.google.com/url?sa=i&url=https%3A%2F%2Frvu.edu.in%2Frvu-at-a-glance%2F&psig=AOvVaw1p6XLi-tSbbSrwlw2B46nm&ust=1735408771825000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCID7kc3DyIoDFQAAAAAdAAAAABAE"
+          src="https://rvu.edu.in/wp-content/themes/rvu/images/rvu-logo.png"
           alt="RV University Logo"
           className="login-logo"
         />
