@@ -33,6 +33,7 @@ const App = () => {
             width: '250px',
             height: '150px',
             marginBottom: '20px',
+            filter: 'brightness(0) saturate(100%) invert(80%) sepia(76%) saturate(700%) hue-rotate(356deg) brightness(90%) contrast(90%)',
           }}
         />
         <header style={{ marginBottom: '20px' }}>
