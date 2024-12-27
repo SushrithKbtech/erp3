@@ -29,7 +29,7 @@ const App = () => {
           }}
         >
           <img
-            src="rvu-logo.png" // Update with the correct path
+            src="src/rvu-logo.png" // Update with the correct path
             alt="RV University Logo"
             style={{
               width: '250px',
