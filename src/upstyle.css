@@ -1065,3 +1065,21 @@ h4 {
   visibility: visible;
   transform: translateY(0);
 }
+.welcome-section {
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 10rem; /* Push it below the header */
+  color: #ffd700;
+}
+
+.welcome-message {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.welcome-subtext {
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #ccc;
+}
