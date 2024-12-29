@@ -7,7 +7,7 @@ import "react-circular-progressbar/dist/styles.css";
 import "./App.css";
 import "./upstyle.css";
 import Modal from 'react-modal';
-import TeachersPage from "./TeachersPage"; // Import the Teachers Page
+import Teachers from "./Teachers"; // Import the Teachers page
 
 const clientId = "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com"; // Replace with your Google OAuth client ID
 const apiKey = "AIzaSyB_o4pSraDM-fSYlvb5wavKvnd0QAJ7m8Y"; // Replace with your Google API Key
