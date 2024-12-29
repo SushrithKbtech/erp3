@@ -1,28 +1,17 @@
 import React, { useState } from "react";
-import "./styles.css"; // Ensure you apply relevant styles
+import "./App.css"; // Use your main CSS or create specific styles if needed
 
 const TeachersPage = () => {
-  const [students, setStudents] = useState([
-    {
-      name: "John Doe",
-      usn: "USN001",
-      marks: 85,
-      attendance: "95%",
-      extracurriculars: ["Football", "Debate"],
-    },
-    {
-      name: "Jane Smith",
-      usn: "USN002",
-      marks: 78,
-      attendance: "89%",
-      extracurriculars: ["Music", "Drama"],
-    },
+  const [students] = useState([
+    { name: "John Doe", usn: "USN001", marks: 85, attendance: "95%", extracurriculars: ["Football", "Debate"] },
+    { name: "Jane Smith", usn: "USN002", marks: 78, attendance: "89%", extracurriculars: ["Music", "Drama"] },
+    { name: "Alice Johnson", usn: "USN003", marks: 92, attendance: "97%", extracurriculars: ["Chess", "Dance"] },
   ]);
 
   return (
     <div className="teachers-page">
-      <h1>Teacher's Dashboard</h1>
-      <table className="student-table">
+      <h1 className="teachers-title">Teacher's Dashboard</h1>
+      <table className="teachers-table">
         <thead>
           <tr>
             <th>Name</th>
