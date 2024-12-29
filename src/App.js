@@ -7,7 +7,6 @@ import "react-circular-progressbar/dist/styles.css";
 import "./App.css";
 import "./upstyle.css";
 import Modal from 'react-modal';
-import Teachers from "./Teachers"; // Import the Teachers page
 
 const clientId = "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com"; // Replace with your Google OAuth client ID
 const apiKey = "AIzaSyB_o4pSraDM-fSYlvb5wavKvnd0QAJ7m8Y"; // Replace with your Google API Key
@@ -206,12 +205,15 @@ const Dashboard = () => {
               daysAbsent: absentDates.length,
               absentDates,
             });
-          } else {
-            attendanceData.push({ subject, attendance: 0 });
           }
         }
   
-        setSubjectAttendance(attendanceData);
+        // Filter out subjects with no attendance data
+        const filteredAttendanceData = attendanceData.filter(
+          (data) => data.attendance > 0
+        );
+  
+        setSubjectAttendance(filteredAttendanceData);
       } catch (error) {
         console.error("Error fetching attendance data:", error);
       }
@@ -225,6 +227,7 @@ const Dashboard = () => {
     const closeModal = () => {
       setModalIsOpen(false);
     };
+  
     return (
       <div>
         <header className="header">
@@ -272,12 +275,12 @@ const Dashboard = () => {
             </ul>
           </nav>
           <div className="welcome-section">
-  <h1 className="welcome-message animate-text">
-    Welcome back, {userDetails.name.split(" ")[0]}!
-  </h1>
-  <p className="welcome-subtext animate-text">We're glad to have you here.</p>
-  <hr className="underline-animate" />
-</div>
+            <h1 className="welcome-message animate-text">
+              Welcome back, {userDetails.name.split(" ")[0]}!
+            </h1>
+            <p className="welcome-subtext animate-text">We're glad to have you here.</p>
+            <hr className="underline-animate" />
+          </div>
           <section className="attendance-section" style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
             {subjectAttendance.map((data, index) => (
               <div
@@ -293,7 +296,6 @@ const Dashboard = () => {
                   })
                 }
               >
-               
                 <CircularProgressbar
                   value={data.attendance}
                   text={`${data.attendance}%`}
@@ -303,7 +305,7 @@ const Dashboard = () => {
                     trailColor: "#d6d6d6",
                   })}
                 />
-                 <h3 style={{ fontSize: "17px", marginBottom: "5px" }}>{data.subject}</h3>
+                <h3 style={{ fontSize: "17px", marginBottom: "5px" }}>{data.subject}</h3>
               </div>
             ))}
           </section>
@@ -328,7 +330,7 @@ const Dashboard = () => {
               color: "#fff",
             },
             overlay: {
-                backgroundColor: "rgba(0, 0, 0, 0.7)", // Darken the overlay
+              backgroundColor: "rgba(0, 0, 0, 0.7)", // Darken the overlay
             },
           }}
         >
@@ -347,7 +349,7 @@ const Dashboard = () => {
               width: "100%",
               padding: "10px",
               marginTop: "10px",
-              background:'empty',
+              background: "empty",
               color: "#000",
               fontWeight: "bold",
               cursor: "pointer",
