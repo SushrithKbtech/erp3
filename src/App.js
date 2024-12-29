@@ -6,6 +6,7 @@ import axios from "axios";
 import "react-circular-progressbar/dist/styles.css";
 import "./App.css";
 import "./upstyle.css";
+import TeachersPage from "./TeachersPage"; // Import TeachersPage
 
 const clientId = "413792080053-i5gc4eg3lv5c8fotvpnof8g9coj068f1.apps.googleusercontent.com"; // Replace with your Google OAuth client ID
 const apiKey = "AIzaSyDirHxXT360WyZYajUxGxgLe3S2TNwteJg"; // Replace with your GoogleAPIKey
@@ -262,12 +263,15 @@ const ProtectedRoute = ({ element }) => {
   return element;
 };
 
+
+// App Component with TeachersPage Route
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+        <Route path="/teachers" element={<ProtectedRoute element={<TeachersPage />} />} />
         <Route path="/clubchat" element={<ProtectedRoute element={<div>Club Chat Page</div>} />} />
         <Route path="/view_files" element={<ProtectedRoute element={<div>View Files Page</div>} />} />
         <Route path="/upload" element={<ProtectedRoute element={<div>Upload Portfolio Page</div>} />} />
