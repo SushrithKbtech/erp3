@@ -97,3 +97,42 @@ button {
     transform: rotate(360deg);
   }
 }
+
+/* App.css */
+
+.teachers-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.teachers-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.teachers-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+.teachers-table th, .teachers-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.teachers-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.teachers-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.teachers-table tr:hover {
+  background-color: #f1f1f1;
+}
+
