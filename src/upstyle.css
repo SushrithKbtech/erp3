@@ -1083,3 +1083,138 @@ h4 {
   font-weight: 300;
   color: #ccc;
 }
+
+/* Modal Styling for Attendance Details */
+/* Modal Styling for Attendance Details */
+/* Modal Styling for Attendance Details */
+.modal {
+  position: absolute;
+  top: 100%; /* Position it just below the circles */
+  left: 50%;
+  transform: translate(-50%, -20px); /* Center horizontally and offset vertically */
+  width: 500px; /* Increased width for better layout */
+  background-color: var(--color-background-darker);
+  color: var(--color-text-light);
+  border-radius: 10px;
+  box-shadow: var(--shadow-medium);
+  padding: 30px; /* Increased padding */
+  z-index: 1000;
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modal--active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0); /* Smooth transition into view */
+}
+
+.modal__header {
+  font-size: 3rem; /* Increased font size for the header */
+  font-weight: bold;
+  text-align: center;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+}
+
+.modal__content {
+  font-size: 2rem; /* Increased font size for content text */
+  line-height: 2.5rem; /* Adjusted line height */
+  margin-bottom: 15px;
+}
+
+.modal__absent-dates {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal__absent-dates li {
+  font-size: 1.8rem; /* Increased font size for list items */
+  line-height: 2.2rem; /* Adjusted line height for spacing */
+  margin-bottom: 10px;
+  color: #f3f3f3;
+}
+
+.modal__close-btn {
+  display: block;
+  width: 100%;
+  padding: 15px 0; /* Increased padding for the button */
+  background-color: var(--color-secondary);
+  color: var(--color-text-dark);
+  font-size: 2rem; /* Increased font size for the button text */
+  font-weight: bold;
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  
+}
+
+.modal__close-btn:hover {
+  background-color: var(--color-secondary-darker);
+  transform: translateY(-2px);
+}
+
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* Darken the modal overlay */
+}
+
+.ReactModal__Content {
+  background-color: #1a1a1a; /* Matches your app's dark theme */
+  color: #fff;
+  border-radius: 10px;
+  border: none;
+  padding: 30px; /* Increased padding */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Keyframes for the underline animation */
+@keyframes expandLine {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 80%;
+  }
+}
+.welcome-section {
+  text-align: center; /* Center-align all text */
+  margin: 0 auto; /* Center the section in the container */
+  padding: 2rem 0; /* Add spacing around the section */
+}
+
+.welcome-message {
+  display: block; /* Ensures the heading takes full width */
+  font-size: 2.5rem; /* Adjust font size as needed */
+  font-weight: bold;
+  margin-bottom: 0.5rem; /* Add spacing between heading and subtext */
+  color: #ffd700; /* Highlighted color */
+}
+
+.welcome-subtext {
+  display: block; /* Forces the text below the heading */
+  font-size: 1.5rem; /* Adjust font size for subtext */
+  color: #ccc; /* Lighter color for subtext */
+  margin-top: 0; /* Remove unnecessary top margin */
+}
+
+.underline-animate {
+  border: 1px solid #ffd700; /* Color for the underline */
+  width: 80%; /* Matches width of the section */
+  margin: 10px auto; /* Centers the underline */
+  animation: expandLine 2s ease-out forwards; /* Smooth left-to-right animation */
+  animation-delay: 0.4s;
+}
